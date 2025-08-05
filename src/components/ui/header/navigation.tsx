@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { cn } from "@/utils/utils"
 import { HeaderMenu } from "./header-menu"
 import { BurgerIcon } from "../svg/burger"
@@ -10,6 +10,18 @@ export const Navigation = () => {
 
    
     const handleCloseMenu = () => setMenuOpen(false)
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.classList.add('overflow-hidden')
+        } else {
+            document.body.classList.remove('overflow-hidden')
+        }
+
+        return () => {
+            document.body.classList.remove('overflow-hidden')
+        }
+    }, [menuOpen])
 
     return (
         <>

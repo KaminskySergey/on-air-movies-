@@ -35,7 +35,7 @@ export const FilterSlider = ({ items }: IFilterSlider) => {
                     disabled={el.name === type}
                     onClick={() => handleClick(el.name)}
                     type="button"
-                    className={cn("inline-flex items-center justify-center whitespace-nowrap px-4 h-8 font-medium  outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-inset text-yellow-600 shadow bg-white dark:text-white dark:bg-yellow-600", {
+                    className={cn("inline-flex items-center justify-center whitespace-nowrap px-4 h-8 font-medium  outline-none focus:ring-2 focus:ring-blue-600 focus:ring-inset text-blue-600 shadow bg-white", {
                         "rounded-l-lg ": el.name === "movies",
                         "rounded-r-lg": el.name === "series",
                         "bg-blue-600 text-white shadow-md cursor-not-allowed": el.name === type,

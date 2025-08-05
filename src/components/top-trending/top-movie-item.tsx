@@ -25,7 +25,6 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
     const [trailerKey, setTrailerKey] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(false)
     const { searchParams } = useCustomSearchParams()
-    const [hovered, setHovered] = useState(false);
     const id = searchParams.get('id')
     const type = searchParams.get('type') || "movies";
     async function handleOpenTrailer() {
@@ -49,8 +48,8 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
                     "scale-105 shadow-2xl hover:scale-105  cursor-pointer": isActive,   
                 }
             )}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            // onMouseEnter={() => setHovered(true)}
+            // onMouseLeave={() => setHovered(false)}
         >
             <Image
                 fill
@@ -77,13 +76,13 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
                     </div>
                 </div>
                 <div className="flex flex-col items-center">
-                    <p className="text-[12px] line-clamp-4 text-left">{movie.overview}</p>
+                    {/* <p className="text-[12px] line-clamp-4 text-left">{movie.overview}</p> */}
                     <ArrowDownIcon />
                 </div>
             </div>
                 
             }
-            {isActive && hovered && (
+            {isActive && (
                 <button
                     className="trailer-btn absolute left-1/2 top-1/2 -translate-x-1/2  -translate-y-1/2 px-3 py-1 border-none outline-none text-black opacity-90 hover:opacity-100 transition-opacity shadow-lg"
                     onClick={handleOpenTrailer}

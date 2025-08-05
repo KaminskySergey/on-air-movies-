@@ -22,39 +22,45 @@ export function TopActorDetailsInfo({ personId }: ITopActorDetailsInfo) {
     if (!actor) return
     return <>
         <div className="flex flex-col gap-4">
-            <div>
-                <h2 className="text-3xl font-bold">{actor?.name}</h2>
-            </div>
-            <div className="flex gap-12">
-                <div>
-                    <span className="font-semibold text-gray-400">Date of Birth:</span><br />
-                    {actor.birthday || 'Unknown'}
-                </div>
-                <div>
-                    <span className="font-semibold text-gray-400">Place of Birth:</span><br />
-                    {actor.place_of_birth || 'Unknown'}
-                </div>
-                {actor.deathday && (
-                    <div>
-                        <span className="font-semibold text-gray-400">Date of Death:</span><br />
-                        {actor.deathday}
-                    </div>
-                )}
-            </div>
-        </div>
+    {/* Имя */}
+    <div>
+        <h2 className="text-2xl sm:text-3xl font-bold">{actor?.name}</h2>
+    </div>
 
-        {/* Biography */}
+    {/* Инфо: дата, место, смерть */}
+    <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
         <div>
-            {actor.biography ? (
-                <>
-                    <h3 className="text-lg font-semibold mb-1 text-indigo-400">Biography</h3>
-                    <div className="h-[320px] scrollbar overflow-y-auto">
-                        <p className="text-sm leading-relaxed text-gray-300">{actor.biography}</p>
-                    </div>
-                </>
-            ) : (
-                <p className="text-sm italic text-gray-400">Biography not available.</p>
-            )}
+            <span className="font-semibold text-gray-400 text-sm sm:text-base">Date of Birth:</span><br />
+            <span className="text-sm sm:text-base">{actor.birthday || 'Unknown'}</span>
         </div>
+        <div>
+            <span className="font-semibold text-gray-400 text-sm sm:text-base">Place of Birth:</span><br />
+            <span className="text-sm sm:text-base">{actor.place_of_birth || 'Unknown'}</span>
+        </div>
+        {actor.deathday && (
+            <div>
+                <span className="font-semibold text-gray-400 text-sm sm:text-base">Date of Death:</span><br />
+                <span className="text-sm sm:text-base">{actor.deathday}</span>
+            </div>
+        )}
+    </div>
+</div>
+
+{/* Биография */}
+<div className="mt-6">
+    {actor.biography ? (
+        <>
+            <h3 className="text-base sm:text-lg font-semibold mb-2 text-indigo-400">Biography</h3>
+            <div className="h-[280px] sm:h-[320px] overflow-y-auto pr-2 scrollbar ">
+                <p className="text-sm leading-relaxed text-gray-300 whitespace-pre-line">
+                    {actor.biography}
+                </p>
+            </div>
+        </>
+    ) : (
+        <p className="text-sm italic text-gray-400">Biography not available.</p>
+    )}
+</div>
+
     </>
 }

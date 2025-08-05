@@ -31,7 +31,7 @@ export function TopPeopleDetails({ personId }: ITopPeopleDetails) {
     })()
   
     return (
-      <div className="w-[50%] h-[600px] p-6 bg-black/40 rounded-lg text-white space-y-4">
+      <div className="w-full lg:w-[50%] h-[600px] p-6 bg-black/40 rounded-lg text-white space-y-4">
         <div className="h-full flex flex-col gap-5 overflow-hidden">
           <TabActorDetails tabs={tabs} handleTabChange={handleTabChange} tabActive={tabActive} />
   

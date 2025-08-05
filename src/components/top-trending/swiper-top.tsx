@@ -12,6 +12,7 @@ import { useCustomSearchParams } from '@/hooks/use-search-params';
 import { LeftArrow } from '../ui/svg/left-arrow';
 import { RightArrow } from '../ui/svg/right-arrow';
 import { Spinner } from '../ui/spinner/spinner';
+import { useResponsiveCount } from '@/hooks/use-responsive';
 interface ISwiperTop {
 
     topTrending: IMovie[]
@@ -27,7 +28,10 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
     const [currentId, setCurrentId] = useState<string | null>(null)
     const [activeIdx, setActiveIdx] = useState<number | null>(null)
 
-    const [visibleCount, setVisibleCount] = useState(9);
+
+    const slidesPerView = useResponsiveCount();
+
+
 
     const swiperRef = useRef<SwiperType | null>(null);
 
@@ -45,22 +49,22 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
     // }, [topTrending, searchParams]);
 
 
-    useEffect(() => {
-        const updateVisibleCount = () => {
-            const w = window.innerWidth;
-            if (w < 768) {
-                setVisibleCount(3);
-            } else if (w < 1024) {
-                setVisibleCount(5);
-            } else {
-                setVisibleCount(9);
-            }
-        };
+    // useEffect(() => {
+    //     const updateVisibleCount = () => {
+    //         const w = window.innerWidth;
+    //         if (w < 768) {
+    //             setVisibleCount(3);
+    //         } else if (w < 1024) {
+    //             setVisibleCount(5);
+    //         } else {
+    //             setVisibleCount(9);
+    //         }
+    //     };
 
-        updateVisibleCount();
-        window.addEventListener('resize', updateVisibleCount);
-        return () => window.removeEventListener('resize', updateVisibleCount);
-    }, []);
+    //     updateVisibleCount();
+    //     window.addEventListener('resize', updateVisibleCount);
+    //     return () => window.removeEventListener('resize', updateVisibleCount);
+    // }, []);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
@@ -85,7 +89,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
         }
     }, [topTrending, type]);
 
-    const half = Math.floor(visibleCount / 2);
+    const half = Math.floor(slidesPerView / 2);
 
     const isVisible = (index: number) => {
         if (activeIdx === undefined || activeIdx === null) return true;
@@ -95,7 +99,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
 
 
     return (
-        <div className="relative z-30 min-h-[300px]">
+        <div className="relative z-30 min-h-[150px]">
             <button className="!hidden sm:!inline-flex z-40 swiper-prev absolute top-1/2 left-[-15px] -translate-y-1/2 bg-black text-white cursor-pointer rounded-full opacity-80 hover:opacity-100">
                 {isSwiper && <LeftArrow />}
             </button>

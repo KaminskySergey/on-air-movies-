@@ -41,7 +41,6 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
         }
     }
     const handleChange = () => setIsOpen(pS => !pS)
-    console.log(movie)
     return <>
         <div
             className={cn(
@@ -74,7 +73,7 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
                                 {i < Math.round(movie.vote_average / 2) ? '⭐' : '☆'}
                             </span>
                         ))}
-                        <p className="pl-4 text-[18px]">{getYearFromDate(movie.release_date || movie.first_air_date)}</p>
+                        <p className="pl-4 text:base md:text-[18px]">{getYearFromDate(movie.release_date || movie.first_air_date)}</p>
                     </div>
                 </div>
                 <div className="flex flex-col items-center">

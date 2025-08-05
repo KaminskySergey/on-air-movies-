@@ -34,9 +34,9 @@ export function TopTrendingComponent({ topTrending }: ITopTrendingComponent) {
         </div>
         <SwiperTop urlName={"id"} topTrending={topTrending} />
 
-        <div className="relative h-[650px]">
+      
             <TopRatedDetailsComponent />
-        </div>
+       
 
     </Container>
 

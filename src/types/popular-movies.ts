@@ -28,6 +28,11 @@ export interface IMovies {
     id: number;
     title: string;
     poster_path: string | null;
+    number_of_seasons?: number;
+    number_of_episodes?: number;
+    first_air_date?: string;
+    last_air_date?: string;
+    status: string;
     genres: { id: number; name: string }[];
     overview: string;
     release_date: string;

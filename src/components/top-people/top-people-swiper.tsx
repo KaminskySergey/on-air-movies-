@@ -5,6 +5,7 @@ import { cn } from "@/utils/utils";
 import { useState } from 'react';
 import { IPerson } from '@/types/people';
 import Image from "next/image";
+import { useResponsiveCount } from "@/hooks/use-responsive";
 
 interface ITopPeopleSwiper {
     setActivePerson: (person: IPerson) => void
@@ -15,14 +16,18 @@ export function TopPeopleSwiper({ setActivePerson, people }: ITopPeopleSwiper) {
     const [isSwiper, setIsSwiper] = useState(false)
     const [activePersonIdx, setActivePersonIdx] = useState<number>(0);
 
+    const slidesPerView = useResponsiveCount(
+        { sm: 570, md: 571 },
+        { sm: 1, md: 2, lg: 2 }
+      );
 
-    return <div className="w-[50%] h-full overflow-hidden flex items-center justify-center">
+    return <div className="w-full lg:w-[50%] h-[600px] overflow-hidden flex items-center justify-center">
         <div className="w-full h-[90%]">
             <Swiper
                 effect="coverflow"
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={2}
+                slidesPerView={slidesPerView}
                 spaceBetween={0}
                 initialSlide={2}
                 loop={true}
@@ -48,7 +53,7 @@ export function TopPeopleSwiper({ setActivePerson, people }: ITopPeopleSwiper) {
                         <SwiperSlide
                             key={person.id}
                             className={cn(
-                                "relative flex justify-center items-center w-[300px] h-[300px] transition-all duration-500",
+                                "relative flex justify-center items-center w-full h-full transition-all duration-500",
                                 {
                                     "mb-[-10px] shadow-[0_10px_0px_0_rgba(25,43,206,0.6)]": isSwiper && idx === activePersonIdx
                                 }

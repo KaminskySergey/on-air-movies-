@@ -13,7 +13,7 @@ export const FooterTop = () => {
             <TitleFooter title="Contacts me" />
             <SocialList />
         </div>
-        <div className="w-full flex flex-col gap-8 md:w-1/3">
+        <div className="w-full flex flex-col gap-8 md:w-[1/3]">
             <TitleFooter title="My life" />
             <FooterLife />
         </div>

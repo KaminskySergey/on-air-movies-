@@ -15,16 +15,14 @@ export default async function Home({
 }){
   const { type } = await searchParams || "movies";
   const topTrending = await getTopTrending({ type })
-  // const movieDetails = await getTopRatedDetails(movieId)
-  // console.log(movieDetails, 'movieDetailsmovieDetailsmovieDetails')
-  // const photos = await getPhotos()
+
   const people = await getPeople()
   if (!type?.length) {
     redirect(`/?type=movies`);
   }
   return (
     <>
-      <section className="pt-4 bg-black">
+      <section className="py-4 bg-black">
         <TopTrendingComponent topTrending={topTrending.results} />
 
       </section>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { TabActorDetails } from "../ui/tab/tab-actor-details"
+import { TabActorDetails } from "../../ui/tab/tab-actor-details"
 import { tabs } from "@/const/tabs"
 import { TopActorDetailsInfo } from "./top-actor-details-info"
 import { TopActorWorks } from "./top-actor-works"

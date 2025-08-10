@@ -1,5 +1,6 @@
 import { fetcher } from "@/api/helpers";
 import { ICredits } from "@/types/actors";
+import { IMovieImages } from "@/types/images";
 import { IMovieDetails, IMovies } from "@/types/popular-movies";
 import { IVideoTrailer } from "@/types/video";
 
@@ -21,10 +22,14 @@ export const getTopTrending = async ({
       : "movie";
 
   const response = await fetcher<IMovies>(
-    `trending/${currentType}/day?language=en-US`
+    `trending/${currentType}/day?language=en-US`,
+    {
+      next: { revalidate: 3600 },
+    }
   );
   return response;
 };
+
 export const getTopRatedDetailsMovie = async (movieId: string | undefined) => {
   const response = await fetcher<IMovieDetails>(`movie/${movieId}`);
   return response;
@@ -54,11 +59,7 @@ export const getTrailer = async (type: string, id: string | null) => {
   return response;
 };
 
-
-export const getPhotos = async () => {
-  const response = await fetcher('trending/all/day')
-  return response
-}
-
-
-
+export const getMoviesImages = async (movieId: string | null) => {
+  const response = await fetcher<IMovieImages>(`/3/movie/${movieId}/images`);
+  return response;
+};

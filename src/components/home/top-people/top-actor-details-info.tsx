@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { getPeopleDetailsId } from "../../../actions/actors";
+import { getPeopleDetailsId } from "../../../../actions/actors";
 import { IPersonDetails } from "@/types/people";
 
 interface ITopActorDetailsInfo {

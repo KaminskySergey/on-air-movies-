@@ -1,7 +1,7 @@
 
 'use client'
 
-import { Container } from "../ui/container"
+import { Container } from "../../ui/container"
 import {  useState } from "react"
 import { TopPeopleSwiper } from "./top-people-swiper";
 import { TopPeopleDetails } from "./top-people-details";

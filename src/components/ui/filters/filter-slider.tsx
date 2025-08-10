@@ -17,7 +17,7 @@ export const FilterSlider = ({ items }: IFilterSlider) => {
     const type = searchParams.get('type')
     useEffect(() => {
         if (!searchParams.has("type")) {
-            router.replace(pathname + "?" + createQueryString("type", "movies"));
+            router.push(pathname + "?" + createQueryString("type", "movies"));
         }
     }, [searchParams, router, pathname, createQueryString]);
 
@@ -28,6 +28,7 @@ export const FilterSlider = ({ items }: IFilterSlider) => {
 
         router.push(pathname + "?" + params.toString());
     };
+    if (!type) return null;
     return <List className="inline-flex items-center p-1 gap-1 text-xs md:text-base text-gray-600 bg-blue-500 rounded-xl">
         {items.map((el) => (
             <li key={el.id}>

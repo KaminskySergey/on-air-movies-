@@ -9,10 +9,11 @@ import { useEffect, useRef, useState } from 'react';
 import { TopMovieItem } from './top-movie-item';
 import { Swiper as SwiperType } from 'swiper';
 import { useCustomSearchParams } from '@/hooks/use-search-params';
-import { LeftArrow } from '../ui/svg/left-arrow';
-import { RightArrow } from '../ui/svg/right-arrow';
-import { Spinner } from '../ui/spinner/spinner';
+
 import { useResponsiveCount } from '@/hooks/use-responsive';
+import { LeftArrow } from '@/components/ui/svg/left-arrow';
+import { RightArrow } from '@/components/ui/svg/right-arrow';
+import { Spinner } from '@/components/ui/spinner/spinner';
 interface ISwiperTop {
 
     topTrending: IMovie[]
@@ -21,6 +22,8 @@ interface ISwiperTop {
 
 export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
     const { router, pathname, createQueryString, searchParams } = useCustomSearchParams();
+
+
     const [isSwiper, setIsSwiper] = useState<boolean>(false)
 
     const type = searchParams.get("type")
@@ -36,37 +39,12 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
     const swiperRef = useRef<SwiperType | null>(null);
 
     const updateUrlWithId = (id: number) => {
+        const currentIdInUrl = searchParams.get(urlName);
+        if (currentIdInUrl === id.toString()) return;
         router.push(`${pathname}?${createQueryString(urlName, id.toString())}`);
     };
 
-
-    // useEffect(() => {
-    //     const idFromUrl = searchParams.get(urlName);
-    //     setCurrentId(idFromUrl)
-    //     if (!idFromUrl && topTrending.length) {
-    //         updateUrlWithId(topTrending[0].id);
-    //     }
-    // }, [topTrending, searchParams]);
-
-
-    // useEffect(() => {
-    //     const updateVisibleCount = () => {
-    //         const w = window.innerWidth;
-    //         if (w < 768) {
-    //             setVisibleCount(3);
-    //         } else if (w < 1024) {
-    //             setVisibleCount(5);
-    //         } else {
-    //             setVisibleCount(9);
-    //         }
-    //     };
-
-    //     updateVisibleCount();
-    //     window.addEventListener('resize', updateVisibleCount);
-    //     return () => window.removeEventListener('resize', updateVisibleCount);
-    // }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         const idFromUrl = searchParams.get(urlName);
         const firstId = topTrending[0]?.id?.toString();
@@ -87,7 +65,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
                 swiperRef.current?.slideToLoop(foundIdx);
             }
         }
-    }, [topTrending, type]);
+    }, [topTrending, type, currentId]);
 
     const half = Math.floor(slidesPerView / 2);
 
@@ -104,7 +82,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
                 {isSwiper && <LeftArrow />}
             </button>
             <button className="!hidden sm:!inline-flex z-40  swiper-next absolute top-1/2 right-[-15px] -translate-y-1/2  bg-black text-white cursor-pointer rounded-full opacity-80 hover:opacity-100">
-            {isSwiper && <RightArrow />}
+                {isSwiper && <RightArrow />}
             </button>
             <Swiper
                 className='h-full flex items-center justify-center'
@@ -121,11 +99,11 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
                     768: {
                         slidesPerView: 5,
                     },
-                    
+
                     1024: {
                         slidesPerView: 7,
                     },
-                    
+
                 }}
                 coverflowEffect={{
                     rotate: 0,

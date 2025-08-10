@@ -1,10 +1,9 @@
 "use client"
 import { IMovie } from "@/types/popular-movies"
-import { Container } from "../ui/container"
 import { SwiperTop } from "./swiper-top"
 import { TopRatedDetailsComponent } from "./top-rated-details-component"
-import { FilterSlider } from "../ui/filters/filter-slider"
-import { useCustomSearchParams } from "@/hooks/use-search-params"
+import { Container } from "@/components/ui/container"
+import { FilterSlider } from "@/components/ui/filters/filter-slider"
 
 interface ITopTrendingComponent {
     topTrending: IMovie[]
@@ -24,10 +23,7 @@ const items = [
 ]
 
 export function TopTrendingComponent({ topTrending }: ITopTrendingComponent) {
-    const { searchParams } = useCustomSearchParams()
-    const type = searchParams.get('type')
-
-    if (!type) return
+  
     return <Container className="flex relative flex-col gap-2 md:gap-1 justify-center overflow-hidden ">
         <div>
             <FilterSlider items={items} />

@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { getPeopleDetailsMovies, getPeopleDetailsSeries } from "../../../actions/actors";
+import { getPeopleDetailsMovies, getPeopleDetailsSeries } from "../../../../actions/actors";
 import { IActorWorkSerieHomePage } from "@/types/actor-series";
 import { IActorWorkMovieHomePage } from "@/types/actor-movie";
-import { WorksListHome } from "../ui/list/works-list-home";
+import { WorksListHome } from "../../ui/list/works-list-home";
 
 interface ITopActorWorks {
     personId: number

@@ -1,3 +1,6 @@
+import { IActor } from "./actors";
+import { IImage } from "./images";
+
 export interface IHeroInfo {
   adult: boolean;
   backdrop_path: string;
@@ -14,4 +17,10 @@ export interface IHeroInfo {
   vote_average: number;
   vote_count: number;
   imgLocal: string;
+}
+
+export interface IHeroDetails {
+  cast: IActor[];
+  runtime: number | null;
+  backdrops: IImage[];
 }

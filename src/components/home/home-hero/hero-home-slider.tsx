@@ -3,18 +3,18 @@ import { getGenreName, truncateText } from "@/utils/utils"
 import Image from "next/image"
 import { EffectFade, Navigation, Pagination, Parallax } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { OverlayBg } from "../ui/overlay/overlay-bg"
-import GradientOverlay from "../ui/overlay/gradient-overlay"
+import { OverlayBg } from "../../ui/overlay/overlay-bg"
+import GradientOverlay from "../../ui/overlay/gradient-overlay"
 import { IHeroInfo } from "@/types/hero-data"
-import { List } from "../ui/list/list"
-import { GenresItem } from "../ui/genres/genres-item"
-import { Container } from "../ui/container"
+import { List } from "../../ui/list/list"
+import { GenresItem } from "../../ui/genres/genres-item"
+import { Container } from "../../ui/container"
 
-interface IHeroSlider {
+interface IHeroHomeSlider {
     data: IHeroInfo[]
 }
 
-export const HeroSlider = ({ data }: IHeroSlider) => {
+export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
     return <Swiper
         modules={[Parallax, EffectFade, Navigation, Pagination]}
         effect="fade"
@@ -22,7 +22,7 @@ export const HeroSlider = ({ data }: IHeroSlider) => {
         loop={true}
         navigation={true}
         pagination={{ clickable: true }}
-        className="w-full h-[50vh] md:h-[90vh]  "
+        className="w-full h-[50vh] md:h-[90vh]"
 
     >
         <div

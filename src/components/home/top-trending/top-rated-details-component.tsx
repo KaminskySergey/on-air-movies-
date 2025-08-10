@@ -2,12 +2,12 @@
 
 import { IMovieDetails } from "@/types/popular-movies"
 import { useEffect, useState } from "react"
-import { getTopRatedDetailsMovie, getTopRatedDetailsSeries } from "../../../actions/movies";
+import { getTopRatedDetailsMovie, getTopRatedDetailsSeries } from "../../../../actions/movies";
 import { ActorsList } from "./actors-list";
 import { getYearFromDate, truncateText } from "@/utils/utils";
 import { useCustomSearchParams } from "@/hooks/use-search-params";
-import RatingStar from "../ui/star/rating-star";
-import GradientOverlay from "../ui/overlay/gradient-overlay";
+import RatingStar from "../../ui/star/rating-star";
+import GradientOverlay from "../../ui/overlay/gradient-overlay";
 
 
 export function TopRatedDetailsComponent() {
@@ -18,7 +18,7 @@ export function TopRatedDetailsComponent() {
     const id = searchParams.get('id');
 
     useEffect(() => {
-        if (!id) return;
+        if (!id || !type) return;
 
         const fetchDetails = async () => {
             let data = null;
@@ -126,7 +126,7 @@ export function TopRatedDetailsComponent() {
                 </div>
             </div>
             <div className="w-full lg:w-[60%] h-[650px]  relative bg-cover bg-center rounded-2xl" style={{
-                backgroundImage: `url('https://image.tmdb.org/t/p/w500${currentMovie.backdrop_path}')`,
+                backgroundImage: `url('https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}')`,
             }}>
                 <div className="absolute inset-0 bg-black/60 lg:bg-black/10 z-10"></div>
                 <GradientOverlay position="top" />

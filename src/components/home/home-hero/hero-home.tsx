@@ -1,13 +1,13 @@
 
 import { moviesHeroInfo } from "@/const/hero-data"
-import { HeroSlider } from "./hero-slider"
+import { HeroHomeSlider } from "./hero-home-slider"
 
 
-export const Hero = () => {
+export const HeroHome = () => {
    
     return (
         <section className="relative bg-black  flex items-center overflow-hidden">
-            <HeroSlider data={moviesHeroInfo}/>
+            <HeroHomeSlider data={moviesHeroInfo}/>
 
 
         </section>

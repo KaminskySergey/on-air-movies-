@@ -3,13 +3,13 @@
 'use client'
 
 import { IMovie } from "@/types/popular-movies"
-import { PlayIcon } from "../ui/svg/play"
+import { PlayIcon } from "../../ui/svg/play"
 import { cn, getYearFromDate } from "@/utils/utils"
 import { useState } from "react"
-import { getTrailer } from "../../../actions/movies"
-import Modal from "../ui/modal/modal"
-import { ArrowDownIcon } from "../ui/svg/arrow-down"
-import { Trailer } from "../ui/trailer/trailer"
+import { getTrailer } from "../../../../actions/movies"
+import Modal from "../../ui/modal/modal"
+import { ArrowDownIcon } from "../../ui/svg/arrow-down"
+import { Trailer } from "../../ui/trailer/trailer"
 import { useCustomSearchParams } from "@/hooks/use-search-params"
 import Image from "next/image"
 

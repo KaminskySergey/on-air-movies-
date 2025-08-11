@@ -22,12 +22,10 @@ export function TopActorDetailsInfo({ personId }: ITopActorDetailsInfo) {
     if (!actor) return
     return <>
         <div className="flex flex-col gap-4">
-    {/* Имя */}
     <div>
         <h2 className="text-2xl sm:text-3xl font-bold">{actor?.name}</h2>
     </div>
 
-    {/* Инфо: дата, место, смерть */}
     <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
         <div>
             <span className="font-semibold text-gray-400 text-sm sm:text-base">Date of Birth:</span><br />
@@ -46,7 +44,6 @@ export function TopActorDetailsInfo({ personId }: ITopActorDetailsInfo) {
     </div>
 </div>
 
-{/* Биография */}
 <div className="mt-6">
     {actor.biography ? (
         <>

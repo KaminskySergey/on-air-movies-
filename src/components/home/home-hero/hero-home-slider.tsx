@@ -22,7 +22,7 @@ export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
         loop={true}
         navigation={true}
         pagination={{ clickable: true }}
-        className="w-full h-[50vh] md:h-[90vh]"
+        className="w-full h-[60vh] md:h-[90vh]"
 
     >
         <div
@@ -54,7 +54,7 @@ export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
 
 
 
-                    <Container className="absolute pt-[32px] md:pt-0 mx-[24px] md:mx-0 inset-0 flex flex-col gap-1 md:gap-5 justify-center px-4 sm:px-8 md:px-20 z-10 text-white">
+                    <Container className="absolute pt-[32px] md:pt-[76px] mx-[24px] md:mx-0 inset-0 flex flex-col gap-1 md:gap-5 justify-center px-4 sm:px-8 md:px-20 z-10 text-white">
 
                         <h2
                             className="text-2xl sm:text-3xl md:text-7xl font-bold"

@@ -1,13 +1,8 @@
 "use client"
-import { Container } from "@/components/ui/container"
-import { GenresItem } from "@/components/ui/genres/genres-item"
-import { List } from "@/components/ui/list/list"
-import GradientOverlay from "@/components/ui/overlay/gradient-overlay"
-import { OverlayBg } from "@/components/ui/overlay/overlay-bg"
 import { IMovie } from "@/types/popular-movies"
 import { cn } from "@/utils/utils"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { EffectFade, FreeMode, Navigation, Thumbs } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import 'swiper/css/thumbs';
@@ -15,20 +10,20 @@ import { Spinner } from "@/components/ui/spinner/spinner"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useCustomSearchParams } from "@/hooks/use-search-params"
 import { HeroContainer } from "@/components/ui/hero/hero-container"
-
-import { getHeroInfoMovies } from "@/app/(content)/movies/[id]/layout"
+import SwiperCore from 'swiper';
 import { IHeroDetails } from "@/types/hero-data"
-
-
+import { getHeroInfoMovies } from "../../../../actions/movies"
+import type { Swiper as SwiperType } from 'swiper';
 
 interface IHeroMoviesSlider {
     data: IMovie[]
     currentMoviesId: string
-    heroDetails: IHeroDetails | null
+    category: string
+    // heroDetails: IHeroDetails | null
 }
 
-export const HeroMoviesSlider = ({ data, currentMoviesId }: IHeroMoviesSlider) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+export const HeroMoviesSlider = ({category, data, currentMoviesId }: IHeroMoviesSlider) => {
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     // const [activeIndex, setActiveIndex] = useState(0)
     const [isSwiper, setIsSwiper] = useState(false)
     // const [isLoadingImg, setIsLoadingImg] = useState(true);
@@ -36,13 +31,14 @@ export const HeroMoviesSlider = ({ data, currentMoviesId }: IHeroMoviesSlider) =
     const [heroDetails, setHeroDetails] = useState<null | IHeroDetails>(null);
     const [isLoadingDetails, setIsLoadingDetails] = useState(true);
 
-
+    const outerSwiperRef = useRef<SwiperCore>(null);
 
     const initialIndex = data.findIndex(m => m.id.toString() === currentMoviesId);
     const [activeIndex, setActiveIndex] = useState(initialIndex);
 
 
     const onSlideChange = (realIndex: number) => {
+        if (realIndex === activeIndex) return;
         setActiveIndex(realIndex);
         setIsLoadingDetails(true);
         setHeroDetails(null);
@@ -53,20 +49,19 @@ export const HeroMoviesSlider = ({ data, currentMoviesId }: IHeroMoviesSlider) =
 
     useEffect(() => {
         if (!currentMoviesId) return;
-    
-        let isCurrent = true;  
+
+        let isCurrent = true;
         setIsLoadingDetails(true);
         setHeroDetails(null);
-    
+
         const fetchGetHeroDetail = async () => {
             try {
                 const data = await getHeroInfoMovies(currentMoviesId);
                 if (!isCurrent) return;
-    
+
                 const { cast } = data.credits;
                 const { runtime } = data.details;
                 const { backdrops } = data.images;
-    
                 setHeroDetails({ cast, runtime, backdrops });
                 setIsLoadingDetails(false);
             } catch (error) {
@@ -75,16 +70,17 @@ export const HeroMoviesSlider = ({ data, currentMoviesId }: IHeroMoviesSlider) =
                 console.error(error);
             }
         };
-    
+
         fetchGetHeroDetail();
-    
+
         return () => {
-            isCurrent = false;  
+            isCurrent = false;
         };
     }, [currentMoviesId]);
+    
     useEffect(() => {
-        console.log('Loading:', isLoadingDetails, 'Details:', heroDetails);
     }, [isLoadingDetails, heroDetails]);
+
     const currentFilteredMovie = data.find(el => el.id.toString() === currentMoviesId.toString());
     return (<>
         <Swiper
@@ -97,20 +93,21 @@ export const HeroMoviesSlider = ({ data, currentMoviesId }: IHeroMoviesSlider) =
             onSwiper={(swiper) => {
                 setThumbsSwiper(swiper);
                 setIsSwiper(true);
+                outerSwiperRef.current = swiper;
             }}
             navigation={true}
             thumbs={{ swiper: thumbsSwiper }}
             pagination={{ clickable: true }}
-            className="w-full h-[50vh] md:h-[80vh]"
+            className="w-full h-[65vh] md:h-[80vh]"
 
         >
             {data.map((movie) => (
                 <SwiperSlide key={movie.id}>
                     {!isSwiper && currentFilteredMovie && (
-                        <HeroContainer isLoadingDetails={isLoadingDetails}
+                        <HeroContainer category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails}
                             item={currentFilteredMovie} heroDetails={heroDetails} />
                     )}
-                    {isSwiper && <HeroContainer isLoadingDetails={isLoadingDetails} item={movie} heroDetails={heroDetails} />}
+                    {isSwiper && <HeroContainer category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails} item={movie} heroDetails={heroDetails} />}
                 </SwiperSlide>
             ))}
 

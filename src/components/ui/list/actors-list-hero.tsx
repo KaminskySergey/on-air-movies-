@@ -1,9 +1,9 @@
 import Image from "next/image"
-import { List } from "./list"
-import { IActor, ICredits } from "@/types/actors";
+import { IActor} from "@/types/actors";
 import Link from "next/link";
 import { AvatarIcon } from "../svg/avatar";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { cn } from "@/utils/utils";
 
 interface IActorsListHero {
     cast: IActor[]
@@ -11,70 +11,84 @@ interface IActorsListHero {
 }
 
 
-export const ActorsListHero = ({ cast , isLoadingDetails}: IActorsListHero) => {
+export const ActorsListHero = ({ cast, isLoadingDetails }: IActorsListHero) => {
+
+
+
+    const [showAll, _] = useState<boolean>(false);
+
+    const maxVisible = 5;
+
+    const visibleCast = showAll ? cast : cast.slice(0, maxVisible);
+
 
 
    
-    const [showAll, setShowAll] = useState<boolean>(false);
 
-    const visibleCast = showAll ? cast : cast.slice(0, 5);
-    const remainingCount = cast.length - visibleCast.length;
-
-   
-
-    const handleShowAllClick = () => {
-        setShowAll(true);
-    };
     if (isLoadingDetails) {
         return (
-          <ul className="flex items-center -space-x-2  w-[270px] scrollbar overflow-y-hidden overflow-x-auto flex-nowrap">
-            {[...Array(5)].map((_, i) => (
-              <ActorSkeleton key={i} />
-            ))}
-          </ul>
+            <ul className="flex items-start -space-x-2 w-[240px] md:w-[270px] scrollbar overflow-y-hidden overflow-x-auto flex-nowrap">
+                {[...Array(5)].map((_, i) => (
+                    <ActorSkeleton key={i} />
+                ))}
+            </ul>
         );
-      }
+    }
 
     return (
-        
-            <ul  className="flex items-center -space-x-2  w-[270px] scrollbar overflow-y-hidden overflow-x-auto flex-nowrap">
-            {visibleCast.map((el) => (
-                <li key={el.id} className="relative flex-shrink-0 bg-black flex items-center justify-center hover:scale-125 hover:z-20 transition h-12 w-12 rounded-full border-2 border-blue-600 overflow-hidden">
-                    <Link href="#">
-                        <div className="relative w-12 h-12 flex justify-center items-center">
-                            {el.profile_path ? (
-                                <Image
-                                    alt={el.original_name}
-                                    src={`https://image.tmdb.org/t/p/w500${el.profile_path}`}
-                                    fill
-                                    sizes="48"
-                                    className="object-cover object-center"
-                                />
-                            ) : (
-                                <AvatarIcon />
-                            )}
-                        </div>
-                    </Link>
-                </li>
-            ))}
+        <div className="flex items-start  gap-2  md:wax-w-[270px]">
+            <ul
+                className={cn(
+                    "flex items-center  pt-[2px] transition-all duration-300",
+                    showAll ? "max-w-full" : "max-w-[240px]"
+                )}
+            >
+                {visibleCast.map((el) => (
+                    <li
+                        key={el.id}
+                        className="-ml-2 first:ml-0 flex-shrink-0 bg-black flex items-center justify-center hover:scale-110 hover:z-20 transition h-12 w-12 rounded-full border-2 border-blue-600 overflow-hidden"
+                    >
+                        <Link href="#">
+                            <div className="relative w-10 h-10 md:w-12 md:h-12 flex justify-center items-center">
+                                {el.profile_path ? (
+                                    <Image
+                                        alt={el.original_name}
+                                        src={`https://image.tmdb.org/t/p/w500${el.profile_path}`}
+                                        fill
+                                        sizes="48"
+                                        className="object-cover object-center"
+                                    />
+                                ) : (
+                                    <AvatarIcon />
+                                )}
+                            </div>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
 
-            {!showAll && remainingCount > 0 && (
-                <li
-                    key="remaining"
-                    onClick={handleShowAllClick}
-                    className="relative cursor-pointer h-12 w-12 rounded-full border-2 border-white bg-black text-white text-sm flex items-center justify-center select-none"
-                    title="Show all cast"
+            {/* Кнопка показать/скрыть
+            {cast.length > maxVisible && (
+                <div
+                    onClick={handleToggleShowAll}
+                    className="flex-shrink-0 pt-[2px] rounded-full flex text-center items-center justify-center cursor-pointer w-10 h-10 md:h-12 md:w-12 border-2 border-white bg-black text-white text-[9px] select-none hover:bg-neutral-800 transition"
+                    title={showAll ? "View All" : "Show All"}
                 >
-                    + {remainingCount}
-                </li>
-            )}
-        </ul>
-        
+                    {showAll ? (
+                        "Hide"
+                    ) : (
+                        <>
+                            View <br /> All
+                        </>
+                    )}
+                </div>
+            )} */}
+        </div>
     )
 }
 
 const ActorSkeleton = () => {
     return (
-      <li className="relative h-12 w-12 rounded-full bg-gray-300 animate-pulse"></li>
+        <li className="relative h-12 w-12 rounded-full bg-gray-300 animate-pulse"></li>
     );
-  };
+};

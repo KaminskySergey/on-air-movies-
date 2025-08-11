@@ -32,7 +32,7 @@ export default function GradientOverlay({ position = 'left', className }: IGradi
             className={cn(
                 'absolute z-20',
                 gradientDirection,
-                position === 'left' || position === 'right' ? 'top-0 w-8 md:w-32 h-full' : 'left-0 w-full h-8 md:h-32',
+                position === 'left' || position === 'right' ? 'top-0 w-8 md:w-16 h-full' : 'left-0 w-full h-8 md:h-16',
                 position === 'left' && 'left-0',
                 position === 'right' && 'right-0',
                 position === 'top' && 'top-0',

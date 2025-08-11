@@ -60,6 +60,19 @@ export const getTrailer = async (type: string, id: string | null) => {
 };
 
 export const getMoviesImages = async (movieId: string | null) => {
-  const response = await fetcher<IMovieImages>(`/3/movie/${movieId}/images`);
+  const response = await fetcher<IMovieImages>(`movie/${movieId}/images?language=en`);
   return response;
 };
+
+
+
+export const getHeroInfoMovies = async (movieId: string) => {
+  const [details, credits, images] = await Promise.all([
+      getTopRatedDetailsMovie(movieId),
+      getCreditsCurrentMovie(movieId),
+      getMoviesImages(movieId)
+      
+  ]);
+  return { details, credits, images };
+}
+

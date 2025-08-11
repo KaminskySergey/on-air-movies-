@@ -6,6 +6,6 @@ export default async function Movies({
 }: {
     params: Promise<{ id: string }>;
 }) {
-
+console.log(params)
     return <MoviesComponent />
 }

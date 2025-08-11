@@ -1,12 +1,9 @@
 
-interface IMoviesComponent {
 
-}
-
-export const MoviesComponent = ({}: IMoviesComponent) => {
+export const MoviesComponent = () => {
     return (
         <>
-        
+        <div></div>
         </>
     )
 }

@@ -2,120 +2,167 @@
 import Image from "next/image"
 import { OverlayBg } from "../overlay/overlay-bg"
 import GradientOverlay from "../overlay/gradient-overlay"
-import { Container } from "../container"
 import { List } from "../list/list"
 import { GenresItem } from "../genres/genres-item"
 import { formatRuntime, getGenreName, truncateText } from "@/utils/utils"
 import { IMovie } from "@/types/popular-movies"
 import { ActorsListHero } from "../list/actors-list-hero"
-
+import SwiperCore from 'swiper';
 import { SkeletonWrapper } from "../spinner/skeleton-wrapper"
 import { IHeroDetails } from "@/types/hero-data"
+import { HeroPosters } from "./hero-posters"
+import { PlayHeroIcon } from "../svg/play-hero"
+import Modal from "../modal/modal"
+import { Trailer } from "../trailer/trailer"
+import { useState } from "react"
+import { useToggle } from "@/hooks/use-toggle"
+import { getTrailer } from "../../../../actions/movies"
+import { SkeletonPosters } from "../spinner/skeleton-posters"
 
 interface IHeroContainer {
     item: IMovie
     heroDetails: IHeroDetails | null
     isLoadingDetails: boolean
+    outerSwiperRef: React.MutableRefObject<SwiperCore | null>
+    category: string
 }
 
-export const HeroContainer = ({ item,  heroDetails, isLoadingDetails }: IHeroContainer) => {
-    // const [heroDetails, setHeroDetails] = useState<any>(null);
-    // const [loading, setLoading] = useState(true);
-    // console.log(currentMoviesId)
-    // useEffect(() => {
-    //     setLoading(true);
+export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
+    const { isToggle, handleToggle } = useToggle()
+    const [trailerKey, setTrailerKey] = useState<string | null>(null);
+    async function handleOpenTrailer() {
+        // setLoading(true);
+        try {
+            const res = await getTrailer(category, item.id.toString());
+            setTrailerKey(res.results[0].key);
+            handleToggle()
+        } catch (error) {
+            console.log((error as Error).message);
+        } finally {
+            // setLoading(false);
+        }
+    }
 
-    //     const fetchGetHeroDetail = async () => {
+    return <>
+        <div className="relative w-full h-full">
+            <Image
+                src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                alt={item.title}
+                fill
+                className="object-cover object-top"
+                priority
+                sizes="48"
 
-    //         const data = await getHeroInfoMovies(currentMoviesId)
-    //         const { cast } = data.credits;
-    //         const { runtime } = data.details;
-    //         const { backdrops } = data.images;
-    //         setHeroDetails({ cast, runtime, backdrops });
-    //         setLoading(false);
-    //     }
-    //     fetchGetHeroDetail()
-    // }, [currentMoviesId]);
-    return <div className="relative w-full h-full">
-        <Image
-            src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
-            alt={item.title}
-            fill
-            className="object-cover object-top"
-            priority
-            sizes="48"
+            />
 
-        />
+            <OverlayBg className="bg-black/60" />
 
-        <OverlayBg className="bg-black/60" />
-
-        <GradientOverlay />
-        <GradientOverlay position="top" />
-        <GradientOverlay position="right" />
-        <GradientOverlay position="bottom" />
-
+            <GradientOverlay />
+            <GradientOverlay position="top" />
+            <GradientOverlay position="right" />
+            <GradientOverlay position="bottom" className="pointer-events-none" />
 
 
 
-        <SkeletonWrapper loading={isLoadingDetails}>
-            <Container className={`absolute pt-[32px] md:pt-0 mx-[24px] md:mx-0 inset-0 flex flex-col gap-1 md:gap-5 justify-center px-4 sm:px-8 md:px-20 z-10
-         text-white transition-all duration-300 ${isLoadingDetails ? "opacity-50 blur-sm" : "opacity-100 blur-none"} `}>
 
-                <h2
-                    className="text-2xl sm:text-3xl md:text-5xl font-bold"
-                    data-swiper-parallax="-300"
+            <SkeletonWrapper loading={isLoadingDetails}>
+                <div
+                    className={`absolute pt-[32px]  gap-0 h-full w-full lg:pt-[calc(84px+1rem)] lg:pb-10 lg:mx-0 flex flex-col lg:flex-row my-4 justify-center px-4 sm:px-8 lg:px-20 z-10
+         text-white  `}
                 >
-                    {item.title}
-                </h2>
+
+                    <div className={`flex flex-col    mx-[24px] gap-5 md:gap-7  inset-0 transition-all duration-300 ${isLoadingDetails ? "opacity-50 blur-sm" : "opacity-100 blur-none"
+                        }`}>
+                        <div >
+                            <h2
+                                className="text-2xl sm:text-3xl md:text-5xl font-bold"
+
+                            >
+                                {item.title}
+                            </h2>
+
+                        </div>
+
+                        <div className="flex items-center flex-wrap gap-2 sm:gap-3 ">
+                            <div className="flex items-center gap-2 ">
+                                <span className="text-yellow-400">★</span>
+                                <span>{item.vote_average.toFixed(1)}</span>
+                                <span className="text-gray-500">|</span>
+                                <span>{item.vote_count.toString()}</span>
+                                <span className="text-white ml-2 md:ml-4">•</span>
+                            </div>
+                            <List
+                                className="flex flex-wrap  gap-2 sm:gap-3"
+                            >
+                                {item.genre_ids.map((id) => (
+                                    <GenresItem text={getGenreName(id)} key={id} />
+                                ))}
+                            </List>
+
+                            <div className="flex items-center">
+                                <span className="text-white mr-2 md:mr-4">•</span>
+                                <span >
+                                    {heroDetails?.runtime ? formatRuntime(heroDetails.runtime) : ""}
+                                </span>
+
+                            </div>
+                        </div>
 
 
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                        <span className="text-yellow-400">★</span>
-                        <span>{item.vote_average.toFixed(1)}</span>
-                        <span className="text-gray-500">|</span>
-                        <span>{item.vote_count.toString()}</span>
-                        <span className="text-white ml-4">•</span>
+                        <div className="w-full sm:max-w-[500px]">
+                            <p
+                                className="block md:hidden  text-xs sm:text-sm md:text-base text-gray-200"
+                            >
+                                {truncateText(item.overview, 150)}
+                                {/* {movie.overview} */}
+                            </p>
+                            <p
+                                className="hidden md:block  text-xs sm:text-sm md:text-base text-gray-200"
+                            >
+                                {truncateText(item.overview, 250)}
+
+                            </p>
+                        </div>
+                        <div className="h-[48px]">
+                            {heroDetails && <ActorsListHero isLoadingDetails={isLoadingDetails} cast={heroDetails?.cast} />}
+                        </div>
+                        <div>
+                            <button
+                                onClick={handleOpenTrailer}
+                                className=" flex justify-center  gap-2 items-center w-[128px] h-[32px]  md:w-[156px] md:h-[50px] cursor-pointer rounded-lg bg-blue-500 py-1 px-3  md:py-3 md:px-6 font-sans  font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            >
+                                <PlayHeroIcon />
+                                <p className="text-[10px] md:text-base">Trailer</p>
+                            </button>
+                        </div>
                     </div>
-                    <List
-                        data-swiper-parallax="-300"
-                        className="flex flex-wrap gap-2 sm:gap-3"
+                    <div
+                        className={`
+    flex mt-[12px] md:mt-0 lg:items-end items-end justify-end mx-[24px] md:mb-8
+    transition-all duration-300
+    ${isLoadingDetails ? "opacity-50 blur-sm" : "opacity-100 blur-none"}
+  `}
+                        style={{ minWidth: '300px', minHeight: '100px' }}
                     >
-                        {item.genre_ids.map((id) => (
-                            <GenresItem text={getGenreName(id)} key={id} />
-                        ))}
-                    </List>
-                    <div>
-                        <span className="text-white mr-4">•</span>
-                        <span >
-                            {heroDetails?.runtime ? formatRuntime(heroDetails.runtime) : ""}
-                        </span>
-
+                        {isLoadingDetails ? (
+                            <SkeletonPosters />
+                        ) : (
+                            heroDetails && heroDetails.backdrops && heroDetails.backdrops.length > 0 && (
+                                <HeroPosters
+                                    isLoadingDetails={isLoadingDetails}
+                                    outerSwiperRef={outerSwiperRef}
+                                    posters={heroDetails.backdrops}
+                                />
+                            )
+                        )}
                     </div>
-                </div>
 
-
-                <div className="max-w-full sm:max-w-[500px]">
-                    <p
-                        className="block md:hidden  text-xs sm:text-sm md:text-base text-gray-200"
-                        data-swiper-parallax="-100"
-                    >
-                        {truncateText(item.overview, 240)}
-                        {/* {movie.overview} */}
-                    </p>
-                    <p
-                        className="hidden md:block  text-xs sm:text-sm md:text-base text-gray-200"
-                        data-swiper-parallax="-100"
-                    >
-                        {item.overview}
-
-                    </p>
                 </div>
-                <div className="h-[48px]">
-                    {heroDetails && <ActorsListHero isLoadingDetails={isLoadingDetails} cast={heroDetails?.cast} />}
-                </div>
-            </Container>
-        </SkeletonWrapper>
-    </div>
+            </SkeletonWrapper>
+        </div>
+        {isToggle && <Modal isOpen={isToggle} onClose={handleToggle} isTrailer>
+            <Trailer trailerKey={trailerKey} />
+        </Modal>}
+    </>
 }
 

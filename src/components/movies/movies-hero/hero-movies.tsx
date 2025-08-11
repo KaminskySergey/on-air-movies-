@@ -1,10 +1,12 @@
 "use server"
-import { getTopTrending } from "../../../../actions/movies"
+import { IMovie } from "@/types/popular-movies"
+
 import { HeroMoviesSlider } from "./hero-movies-slider"
 
 interface IHeroMovies {
     currentMoviesId: string
     category: string
+    moviesTrending: IMovie[]
     // heroDetails: {
     //     cast: IActor[]
     //     runtime: number,
@@ -13,9 +15,9 @@ interface IHeroMovies {
 }
 
 
-export const HeroMovies = async ({category, currentMoviesId}: IHeroMovies) => {
+export const HeroMovies = async ({category, currentMoviesId, moviesTrending}: IHeroMovies) => {
 
-    const moviesTrending = await getTopTrending({type: "movie"})
+    
     
     return <section className="relative bg-black  flex flex-col  overflow-hidden">
     <HeroMoviesSlider category={category}  currentMoviesId={currentMoviesId} data={moviesTrending.results}/>

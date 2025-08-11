@@ -3,6 +3,7 @@ import { useCustomSearchParams } from "@/hooks/use-search-params"
 import { useEffect } from "react"
 import { cn } from "@/utils/utils"
 import { List } from "../list/list"
+import { mainPaths } from "@/configs/nav-page"
 interface IItems {
     id: number,
     name: string
@@ -16,7 +17,7 @@ export const FilterSlider = ({ items }: IFilterSlider) => {
     const { router, pathname, createQueryString, searchParams } = useCustomSearchParams()
     const type = searchParams.get('type')
     useEffect(() => {
-        if (!searchParams.has("type")) {
+        if (mainPaths.includes(pathname) && !searchParams.has("type")) {
             router.push(pathname + "?" + createQueryString("type", "movies"));
         }
     }, [searchParams, router, pathname, createQueryString]);

@@ -1,7 +1,6 @@
-'use server'
+
 import { HeroMovies } from "@/components/movies/movies-hero/hero-movies";
 import { getTopTrending } from "../../../../../actions/movies";
-
 
 
 export default async function MoviesLayout({
@@ -12,6 +11,7 @@ export default async function MoviesLayout({
     children: React.ReactNode;
 }) {
     const { id } = await params;
+    console.log(id)
     const category = 'movie';
     const moviesTrending = await getTopTrending({type: category})
     return (

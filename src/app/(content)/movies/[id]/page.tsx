@@ -1,3 +1,4 @@
+"use server"
 import { MoviesComponent } from "@/components/movies/movies-component";
 
 

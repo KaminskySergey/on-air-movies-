@@ -20,7 +20,7 @@ export const HeroMovies = async ({category, currentMoviesId, moviesTrending}: IH
     
     
     return <section className="relative bg-black  flex flex-col  overflow-hidden">
-    <HeroMoviesSlider category={category}  currentMoviesId={currentMoviesId} data={moviesTrending.results}/>
+    <HeroMoviesSlider category={category}  currentMoviesId={currentMoviesId} data={moviesTrending}/>
 
 
 </section>

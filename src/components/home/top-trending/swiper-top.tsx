@@ -65,7 +65,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
                 swiperRef.current?.slideToLoop(foundIdx);
             }
         }
-    }, [topTrending, type, currentId]);
+    }, [topTrending, type]);
 
     const half = Math.floor(slidesPerView / 2);
 

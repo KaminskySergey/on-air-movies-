@@ -40,7 +40,7 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
 
     const updateUrlWithId = (id: number) => {
         const currentIdInUrl = searchParams.get(urlName);
-        if (currentIdInUrl === id.toString()) return;
+        if (currentIdInUrl === id.toString() || !type) return;
         router.push(`${pathname}?${createQueryString(urlName, id.toString())}`);
     };
 
@@ -48,7 +48,10 @@ export function SwiperTop({ urlName, topTrending }: ISwiperTop) {
     useEffect(() => {
         const idFromUrl = searchParams.get(urlName);
         const firstId = topTrending[0]?.id?.toString();
-
+        console.log(type)
+        if (!type) {
+            return;
+        }
         if (!idFromUrl && firstId) {
             updateUrlWithId(Number(firstId));
             setCurrentId(firstId);

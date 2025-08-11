@@ -3,7 +3,7 @@
 export const MoviesComponent = () => {
     return (
         <>
-        <div></div>
+        <div className="text-white">MoviesComponent</div>
         </>
     )
 }

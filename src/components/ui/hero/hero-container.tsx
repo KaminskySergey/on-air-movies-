@@ -149,7 +149,6 @@ export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isL
                         ) : (
                             heroDetails && heroDetails.backdrops && heroDetails.backdrops.length > 0 && (
                                 <HeroPosters
-                                    isLoadingDetails={isLoadingDetails}
                                     outerSwiperRef={outerSwiperRef}
                                     posters={heroDetails.backdrops}
                                 />

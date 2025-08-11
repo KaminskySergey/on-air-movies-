@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation'
 import { getTopTrending } from '../../../../actions/movies'
 
-export default async function MoviesPage() {
+export default async function MoviesPageRedirect() {
   const data = await getTopTrending({ type: 'movie' })
 
   if (!data.results?.length) {

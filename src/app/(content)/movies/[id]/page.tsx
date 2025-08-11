@@ -1,7 +1,7 @@
 import { MoviesComponent } from "@/components/movies/movies-component";
 
 
-export default async function Movies({
+export default async function MoviesPage({
     params,
 }: {
     params: Promise<{ id: string }>;

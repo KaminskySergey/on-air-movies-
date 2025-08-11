@@ -10,10 +10,9 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 interface IHeroPosters {
     posters: IImage[]
     outerSwiperRef :React.MutableRefObject<SwiperCore | null>;
-    isLoadingDetails: boolean
 }
 
-export const HeroPosters = ({outerSwiperRef, posters, isLoadingDetails }: IHeroPosters) => {
+export const HeroPosters = ({outerSwiperRef, posters }: IHeroPosters) => {
     const [index, setIndex] = useState(-1);
 
     const slides = posters.map((poster) => ({

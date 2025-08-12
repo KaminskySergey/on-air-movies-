@@ -1,11 +1,11 @@
-import {  NextRequest } from 'next/server'
+// import {  NextRequest } from 'next/server'
  
-export function middleware(request: NextRequest) {
-  console.log(request)
-  // return NextResponse.redirect(new URL('/', request.url))
-}
+// export function middleware(request: NextRequest) {
+//   console.log(request)
+//   // return NextResponse.redirect(new URL('/', request.url))
+// }
  
 
-  export const config = {
-    matcher: ['/', '/movies', '/movies/:path*', '/series/:path*'],
-  }
+//   export const config = {
+//     matcher: ['/', '/movies', '/movies/:path*', '/series/:path*'],
+//   }

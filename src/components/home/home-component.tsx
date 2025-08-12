@@ -4,14 +4,22 @@ import { TopPeople } from "./top-people/top-people";
 import { IMovies } from "@/types/popular-movies";
 import { IPeoplePupular } from "@/types/people";
 
+import { HeroHomeSlider } from "./home-hero/hero-home-slider";
+import { moviesHeroInfo } from "@/const/hero-data";
+
 interface IHomeComponent {
     topTrending: IMovies
     people: IPeoplePupular
 }
 
-export const HomeComponent = ({topTrending, people}: IHomeComponent) => {
+export const HomeComponent = ({ topTrending, people }: IHomeComponent) => {
     return (
         <>
+            <section className="relative bg-black  flex items-center overflow-hidden">
+                <HeroHomeSlider data={moviesHeroInfo} />
+
+
+            </section>
             <section className="py-4 bg-black">
                 <TopTrendingComponent topTrending={topTrending.results} />
 

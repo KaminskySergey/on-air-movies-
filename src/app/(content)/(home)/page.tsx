@@ -5,7 +5,7 @@ import { HomeComponent } from "@/components/home/home-component";
 
 
 
-export default async function Home({
+export default async function HomePage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;

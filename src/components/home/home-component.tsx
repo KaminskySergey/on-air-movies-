@@ -1,18 +1,18 @@
 import Image from "next/image";
-// import { TopTrendingComponent } from "./top-trending/top-rated-component";
 import { TopPeople } from "./top-people/top-people";
-import { IMovies } from "@/types/popular-movies";
+import { IMovie } from "@/types/popular-movies";
 import { IPeoplePupular } from "@/types/people";
 
 import { HeroHomeSlider } from "./home-hero/hero-home-slider";
 import { moviesHeroInfo } from "@/const/hero-data";
+import { TopTrendingComponent } from "./top-trending/top-rated-component";
 
 interface IHomeComponent {
-    topTrending?: IMovies
+    topTrending: IMovie[]
     people: IPeoplePupular
 }
 
-export const HomeComponent = ({  people }: IHomeComponent) => {
+export const HomeComponent = ({ topTrending, people }: IHomeComponent) => {
     return (
         <>
             <section className="relative bg-black  flex items-center overflow-hidden">
@@ -20,10 +20,10 @@ export const HomeComponent = ({  people }: IHomeComponent) => {
 
 
             </section>
-            {/* <section className="py-4 bg-black">
-                <TopTrendingComponent topTrending={topTrending.results} />
+            <section className="py-4 bg-black">
+                <TopTrendingComponent topTrending={topTrending} />
 
-            </section> */}
+            </section>
             <section className="py-4 pb-8 relative  ">
                 <Image
                     src="/hero-big.webp"

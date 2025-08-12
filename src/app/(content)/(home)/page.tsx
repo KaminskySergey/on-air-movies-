@@ -15,5 +15,5 @@ export default async function HomePage({
 
   const people = await getPeople()
 
-  return <HomeComponent topTrending={topTrending} people={people}/>
+  return <HomeComponent topTrending={topTrending.results} people={people}/>
 } 

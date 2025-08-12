@@ -2,7 +2,7 @@
 import { IMovie } from "@/types/popular-movies"
 import { cn } from "@/utils/utils"
 import Image from "next/image"
-import {  useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { EffectFade, FreeMode, Navigation, Thumbs } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import 'swiper/css/thumbs';
@@ -22,18 +22,19 @@ interface IHeroMoviesSlider {
     // heroDetails: IHeroDetails | null
 }
 
-export const HeroMoviesSlider = ({category, data, currentMoviesId }: IHeroMoviesSlider) => {
+export const HeroMoviesSlider = ({ category, data }: IHeroMoviesSlider) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     // const [activeIndex, setActiveIndex] = useState(0)
     const [isSwiper, setIsSwiper] = useState(false)
     // const [isLoadingImg, setIsLoadingImg] = useState(true);
-    const { router } = useCustomSearchParams();
     const [heroDetails, setHeroDetails] = useState<null | IHeroDetails>(null);
     const [isLoadingDetails, setIsLoadingDetails] = useState(true);
+    const { router, searchParams, pathname } = useCustomSearchParams();
+    const currentId = searchParams.get('id') || data[0].id;
 
     const outerSwiperRef = useRef<SwiperCore>(null);
 
-    const initialIndex = data.findIndex(m => m.id.toString() === currentMoviesId);
+    const initialIndex = data.findIndex(m => m.id.toString() === currentId);
     const [activeIndex, setActiveIndex] = useState(initialIndex);
 
 
@@ -42,13 +43,16 @@ export const HeroMoviesSlider = ({category, data, currentMoviesId }: IHeroMovies
         setActiveIndex(realIndex);
         setIsLoadingDetails(true);
         setHeroDetails(null);
+
         const movieId = data[realIndex].id;
-        router.push(`/movies/${movieId}`);
+
+        const newSearchParams = new URLSearchParams(searchParams.toString());
+        newSearchParams.set('id', movieId.toString());
+
+        router.replace(`${pathname}?${newSearchParams.toString()}`, { scroll: false });
     };
-
-
     useEffect(() => {
-        if (!currentMoviesId) return;
+        if (!currentId) return;
 
         let isCurrent = true;
         setIsLoadingDetails(true);
@@ -56,7 +60,7 @@ export const HeroMoviesSlider = ({category, data, currentMoviesId }: IHeroMovies
 
         const fetchGetHeroDetail = async () => {
             try {
-                const data = await getHeroInfoMovies(currentMoviesId);
+                const data = await getHeroInfoMovies(currentId.toString());
                 if (!isCurrent) return;
 
                 const { cast } = data.credits;
@@ -76,18 +80,18 @@ export const HeroMoviesSlider = ({category, data, currentMoviesId }: IHeroMovies
         return () => {
             isCurrent = false;
         };
-    }, [currentMoviesId]);
-    
+    }, [currentId]);
+
     useEffect(() => {
     }, [isLoadingDetails, heroDetails]);
 
-    const currentFilteredMovie = data.find(el => el.id.toString() === currentMoviesId.toString());
+    const currentFilteredMovie = data.find(el => el.id.toString() === currentId.toString());
     return (<>
         <Swiper
             modules={[Navigation, Thumbs, EffectFade]}
             // parallax={true}
             loop={true}
-            key={currentMoviesId}
+            // key={currentId}
             onSlideChange={(swiper) => onSlideChange(swiper.realIndex)}
             initialSlide={activeIndex}
             onSwiper={(swiper) => {

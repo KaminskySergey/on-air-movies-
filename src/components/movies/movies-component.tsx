@@ -1,5 +1,5 @@
 import { IMovie } from "@/types/popular-movies"
-import { HeroMovies } from "./movies-hero/hero-movies"
+import { HeroMoviesSlider } from "./movies-hero/hero-movies-slider"
 
 interface IMoviesComponent {
     category: string
@@ -7,8 +7,10 @@ interface IMoviesComponent {
     currentMoviesId: string
 }
 
-export const MoviesComponent = ({category, moviesTrending, currentMoviesId}:IMoviesComponent) => {
+export const MoviesComponent = ({ category, moviesTrending, currentMoviesId }: IMoviesComponent) => {
     return (
-        <HeroMovies category={category} moviesTrending={moviesTrending}  currentMoviesId={currentMoviesId} />
+        <section className="relative bg-black  flex flex-col  overflow-hidden">
+            <HeroMoviesSlider category={category} currentMoviesId={currentMoviesId} data={moviesTrending} />
+        </section>
     )
 }

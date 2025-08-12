@@ -2,7 +2,7 @@
 import { IMovie } from "@/types/popular-movies"
 import { cn } from "@/utils/utils"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import {  useEffect, useRef, useState } from "react"
 import { EffectFade, FreeMode, Navigation, Thumbs } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import 'swiper/css/thumbs';

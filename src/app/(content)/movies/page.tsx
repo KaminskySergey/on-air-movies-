@@ -1,19 +1,13 @@
 "use server"
-import Link from 'next/link';
 import { getTopTrending } from '../../../../actions/movies'
+import { MoviesComponent } from '@/components/movies/movies-component';
 
 
 
 export default async function MoviesPage() {
     const data = await getTopTrending({ type: "movie" });
-
+   const category = "movie"
     return (
-        <div style={{ padding: 20, fontSize: 18 }}>
-            🎬 Movies list will be here soon!
-            <br />
-            <Link href={`/movies/${data.results[0].id}`}>
-                CLick me
-            </Link>
-        </div>
+       <MoviesComponent category={category} moviesTrending={data.results} currentMoviesId={data.results[0].id.toString()}/>
     )
 }

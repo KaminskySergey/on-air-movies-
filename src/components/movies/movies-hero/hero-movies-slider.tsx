@@ -17,7 +17,6 @@ import type { Swiper as SwiperType } from 'swiper';
 
 interface IHeroMoviesSlider {
     data: IMovie[]
-    currentMoviesId: string
     category: string
     // heroDetails: IHeroDetails | null
 }

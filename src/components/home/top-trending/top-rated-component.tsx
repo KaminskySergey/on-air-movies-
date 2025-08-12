@@ -1,39 +1,39 @@
-"use client"
-import { IMovie } from "@/types/popular-movies"
-import { SwiperTop } from "./swiper-top"
-import { TopRatedDetailsComponent } from "./top-rated-details-component"
-import { Container } from "@/components/ui/container"
-import { FilterSlider } from "@/components/ui/filters/filter-slider"
+// "use client"
+// import { IMovie } from "@/types/popular-movies"
+// import { SwiperTop } from "./swiper-top"
+// import { TopRatedDetailsComponent } from "./top-rated-details-component"
+// import { Container } from "@/components/ui/container"
+// import { FilterSlider } from "@/components/ui/filters/filter-slider"
 
-interface ITopTrendingComponent {
-    topTrending: IMovie[]
-}
+// interface ITopTrendingComponent {
+//     topTrending: IMovie[]
+// }
 
 
 
-const items = [
-    {
-        id: 1,
-        name: 'movies',
-    },
-    {
-        id: 2,
-        name: 'series',
-    },
-]
+// const items = [
+//     {
+//         id: 1,
+//         name: 'movies',
+//     },
+//     {
+//         id: 2,
+//         name: 'series',
+//     },
+// ]
 
-export function TopTrendingComponent({ topTrending }: ITopTrendingComponent) {
+// export function TopTrendingComponent({ topTrending }: ITopTrendingComponent) {
   
-    return <Container className="flex relative flex-col gap-2 md:gap-1 justify-center overflow-hidden ">
-        <div>
-            <FilterSlider items={items} />
-        </div>
-        <SwiperTop urlName={"id"} topTrending={topTrending} />
+//     return <Container className="flex relative flex-col gap-2 md:gap-1 justify-center overflow-hidden ">
+//         <div>
+//             <FilterSlider items={items} />
+//         </div>
+//         <SwiperTop urlName={"id"} topTrending={topTrending} />
 
       
-            <TopRatedDetailsComponent />
+//             <TopRatedDetailsComponent />
        
 
-    </Container>
+//     </Container>
 
-}
+// }

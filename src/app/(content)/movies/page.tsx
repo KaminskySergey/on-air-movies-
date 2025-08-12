@@ -2,13 +2,16 @@
 import { redirect } from 'next/navigation'
 import { getTopTrending } from '../../../../actions/movies'
 
+export const dynamic = "force-dynamic";
+
 
 export default async function MoviesRedirectPage() {
-    const data = await getTopTrending({ type: 'movie' });
-    // if (!data.results?.length) redirect('/');
+  const data = await getTopTrending({ type: "movie" });
 
-    const firstId = data.results[0].id;
-    redirect(`/movies/${firstId}`);
+  if (!data.results?.length) {
+    redirect("/");
+  }
 
-  return <></>
+  const firstId = data.results[0].id;
+  redirect(`/movies/${firstId}`);
 }

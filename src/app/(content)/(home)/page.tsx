@@ -11,7 +11,6 @@ export default async function HomePage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }){
   const { type } = await searchParams || "movies";
-  console.log(type)
   const topTrending = await getTopTrending({ type })
 
   const people = await getPeople()

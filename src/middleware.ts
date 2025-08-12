@@ -7,5 +7,5 @@ export function middleware(request: NextRequest) {
  
 
   export const config = {
-    matcher: ['/movies/:path*', '/series/:path*'],
+    matcher: ['/', '/movies', '/movies/:path*', '/series/:path*'],
   }

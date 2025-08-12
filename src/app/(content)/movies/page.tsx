@@ -1,16 +1,15 @@
-import { redirect } from 'next/navigation'
+"use server"
 import { getTopTrending } from '../../../../actions/movies'
 
-export const dynamic = "force-dynamic";
 
 
-export default async function MoviesRedirectPage() {
+export default async function MoviesPage() {
   const data = await getTopTrending({ type: "movie" });
 
-  if (!data.results?.length) {
-    redirect("/");
-  }
-
-  const firstId = data.results[0].id;
-  redirect(`/movies/${firstId}`);
+  return (
+    <div className='text-blue-600'>
+        {data.results[0].original_title}
+        dfvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    </div>
+  )
 }

@@ -9,12 +9,14 @@ import { IHeroInfo } from "@/types/hero-data"
 import { List } from "../../ui/list/list"
 import { GenresItem } from "../../ui/genres/genres-item"
 import { Container } from "../../ui/container"
+import { useState } from "react"
 
 interface IHeroHomeSlider {
     data: IHeroInfo[]
 }
 
 export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
+    const [_, setIsSwiper] = useState(false)
     return <Swiper
         modules={[Parallax, EffectFade, Navigation, Pagination]}
         effect="fade"
@@ -22,7 +24,10 @@ export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
         loop={true}
         navigation={true}
         pagination={{ clickable: true }}
-        className="w-full h-[60vh] md:h-[90vh]"
+        className="w-full h-[60vh] md:h-[90vh] min-h-[400px] overflow-hidden"
+        onSwiper={() => {
+            setIsSwiper(true)
+        }}
 
     >
         <div

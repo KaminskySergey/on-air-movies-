@@ -32,7 +32,7 @@ export const HeaderMenu = ({ vertical = false, onClickItem }: IHeaderMenu) => {
               <Link
                 href={el.href}
                 className={cn('block', {
-                  'pb-1 border-b-2 border-red-500': isActive,
+                  'pb-1 border-b-2 border-blue-500': isActive,
                 })}
                 onClick={onClickItem}
               >

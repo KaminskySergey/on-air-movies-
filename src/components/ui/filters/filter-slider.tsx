@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { cn } from "@/utils/utils"
 import { List } from "../list/list"
 import { mainPaths } from "@/configs/nav-page"
+import { IMovie } from "@/types/popular-movies"
 interface IItems {
     id: number,
     name: string
@@ -11,16 +12,23 @@ interface IItems {
 
 interface IFilterSlider {
     items: IItems[]
+    topTrending: IMovie[]
 }
 
-export const FilterSlider = ({ items }: IFilterSlider) => {
+export const FilterSlider = ({ topTrending, items }: IFilterSlider) => {
     const { router, pathname, createQueryString, searchParams } = useCustomSearchParams()
     const type = searchParams.get('type')
     useEffect(() => {
         if (mainPaths.includes(pathname) && !searchParams.has("type")) {
             router.push(pathname + "?" + createQueryString("type", "movies"));
         }
-    }, [searchParams, router, pathname, createQueryString]);
+
+        if (mainPaths.includes(pathname) && searchParams.has("type") && !searchParams.has("id") && topTrending.length > 0) {
+            router.push(
+                pathname + "?" + createQueryString("id", topTrending[0].id.toString())
+            );
+        }
+    }, [searchParams, router, pathname, createQueryString, topTrending]);
 
     const handleClick = (name: string) => {
         const params = new URLSearchParams(searchParams.toString());

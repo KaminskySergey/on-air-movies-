@@ -9,6 +9,7 @@ export const useToggle = () => {
 
     return {
         isToggle,
-        handleToggle
+        handleToggle,
+        setIsToggle
     }
 }

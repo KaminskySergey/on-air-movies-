@@ -137,8 +137,7 @@ export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isL
                         </div>
                     </div>
                     <div
-                        className={`
-    flex mt-[12px] md:mt-0 lg:items-end items-end justify-end mx-[24px] md:mb-8
+                        className={` hidden md:flex  mt-[12px] md:mt-0 lg:items-end items-end justify-end mx-[24px] md:mb-8
     transition-all duration-300
     ${isLoadingDetails ? "opacity-50 blur-sm" : "opacity-100 blur-none"}
   `}

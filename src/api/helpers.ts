@@ -11,6 +11,9 @@ export async function fetcher<T>(
   if (!url.searchParams.has("language")) {
     url.searchParams.append("language", "en-US");
   }
+  if (!url.searchParams.has("include_adult")) {
+    url.searchParams.append("include_adult", "false");
+  }
 
   const res = await fetch(url.toString(), options);
   if (!res.ok) {

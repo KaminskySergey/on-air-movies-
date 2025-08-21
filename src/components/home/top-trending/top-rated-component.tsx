@@ -26,7 +26,7 @@ export function TopTrendingComponent({ topTrending }: ITopTrendingComponent) {
   
     return <Container className="flex relative flex-col gap-2 md:gap-1 justify-center overflow-hidden ">
         <div>
-            <FilterSlider items={items} />
+            <FilterSlider topTrending={topTrending} items={items} />
         </div>
         <SwiperTop urlName={"id"} topTrending={topTrending} />
 

@@ -12,16 +12,19 @@ import { useCustomSearchParams } from "@/hooks/use-search-params"
 import { HeroContainer } from "@/components/ui/hero/hero-container"
 import SwiperCore from 'swiper';
 import { IHeroDetails } from "@/types/hero-data"
-import { getHeroInfoMovies } from "../../../../actions/movies"
-import type { Swiper as SwiperType } from 'swiper';
 
-interface IHeroMoviesSlider {
+import type { Swiper as SwiperType } from 'swiper';
+import { getHeroInfoKino } from "../../../../actions/movies"
+import { IGenres } from "@/types/genres"
+
+interface IHeroKinoSlider {
     data: IMovie[]
-    category: string
+    category: "movie" | "tv"
+    genresData: IGenres[]
     // heroDetails: IHeroDetails | null
 }
 
-export const HeroMoviesSlider = ({ category, data }: IHeroMoviesSlider) => {
+export const HeroKinoSlider = ({genresData, category, data }: IHeroKinoSlider) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     // const [activeIndex, setActiveIndex] = useState(0)
     const [isSwiper, setIsSwiper] = useState(false)
@@ -59,13 +62,12 @@ export const HeroMoviesSlider = ({ category, data }: IHeroMoviesSlider) => {
 
         const fetchGetHeroDetail = async () => {
             try {
-                const data = await getHeroInfoMovies(currentId.toString());
+                const data = await getHeroInfoKino(category, currentId.toString());
                 if (!isCurrent) return;
-
                 const { cast } = data.credits;
-                const { runtime } = data.details;
+                const { runtime, number_of_episodes, number_of_seasons } = data.details;
                 const { backdrops } = data.images;
-                setHeroDetails({ cast, runtime, backdrops });
+                setHeroDetails({ cast, runtime, number_of_episodes, number_of_seasons, backdrops });
                 setIsLoadingDetails(false);
             } catch (error) {
                 if (!isCurrent) return;
@@ -107,10 +109,10 @@ export const HeroMoviesSlider = ({ category, data }: IHeroMoviesSlider) => {
             {data.map((movie) => (
                 <SwiperSlide key={movie.id}>
                     {!isSwiper && currentFilteredMovie && (
-                        <HeroContainer category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails}
+                        <HeroContainer genresData={genresData} category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails}
                             item={currentFilteredMovie} heroDetails={heroDetails} />
                     )}
-                    {isSwiper && <HeroContainer category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails} item={movie} heroDetails={heroDetails} />}
+                    {isSwiper && <HeroContainer genresData={genresData} category={category} outerSwiperRef={outerSwiperRef} isLoadingDetails={isLoadingDetails} item={movie} heroDetails={heroDetails} />}
                 </SwiperSlide>
             ))}
 
@@ -156,7 +158,7 @@ export const HeroMoviesSlider = ({ category, data }: IHeroMoviesSlider) => {
                             {/* )} */}
                             <Image
                                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                                alt={movie.title}
+                                alt={movie.title || movie.name || movie.original_title}
                                 fill
                                 className={cn("object-cover object-center rounded-lg", {
                                     "border-2 border-blue-500 scale-110 z-10 transition-transform duration-300 ease-in-out": idx === activeIndex

@@ -37,7 +37,7 @@ export interface IMovies {
     overview: string;
     release_date: string;
     name?: string;
-    runtime: number;
+    runtime?: number;
     vote_average: number;
     backdrop_path: string
     original_language: string

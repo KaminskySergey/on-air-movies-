@@ -32,19 +32,6 @@ export const HeroPosters = ({outerSwiperRef, posters }: IHeroPosters) => {
         }
       };
 
-      // if (isLoadingDetails) {
-      //   return (
-      //     <div className="flex space-x-3 w-[500px] h-[200px]  overflow-x-auto scrollbar">
-      //       {[...Array(5)].map((_, i) => (
-      //         <div
-      //           key={i}
-      //           className="w-[150px] h-[100px] rounded-2xl bg-gray-700 animate-pulse"
-      //         />
-      //       ))}
-      //     </div>
-      //   );
-      // }
-      
       return (
         <>
         <div className="space-y-1 w-[500px] z-40 overflow-y-hidden overflow-x-hidden">

@@ -2,7 +2,7 @@
 
 import { IMovieDetails } from "@/types/popular-movies"
 import { useEffect, useState } from "react"
-import { getTopRatedDetailsMovie, getTopRatedDetailsSeries } from "../../../../actions/movies";
+import { getTopRatedDetailsKino} from "../../../../actions/movies";
 import { ActorsList } from "./actors-list";
 import { getYearFromDate, truncateText } from "@/utils/utils";
 import { useCustomSearchParams } from "@/hooks/use-search-params";
@@ -23,9 +23,9 @@ export function TopRatedDetailsComponent() {
         const fetchDetails = async () => {
             let data = null;
             if (type === "movies") {
-                data = await getTopRatedDetailsMovie(id);
+                data = await getTopRatedDetailsKino("movie", id);
             } else if (type === "series") {
-                data = await getTopRatedDetailsSeries(id);
+                data = await getTopRatedDetailsKino("tv", id);
             }
             setCurrentMovie(data);
         };

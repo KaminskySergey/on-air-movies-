@@ -1,4 +1,4 @@
-import { GENRES } from "@/const/genres";
+import { IGenres } from "@/types/genres";
 import { clsx, ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -26,8 +26,8 @@ export function getYearFromDate(dateString: string | null | undefined): string {
   }
 
 
-  export function getGenreName(id: number) {
-    return GENRES.find((g) => g.id === id)?.name ?? "Unknown";
+  export function getGenreName(genresArr: IGenres[], id: number) {
+    return genresArr.find((g) => g.id === id)?.name ?? "Unknown";
 }
 
 

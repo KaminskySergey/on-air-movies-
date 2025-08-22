@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
-import { getCreditsCurrentMovie, getCreditsCurrentSeries } from "../../../../actions/movies"
+import { getCreditsCurrentKino } from "../../../../actions/movies"
 import { ICredits } from "@/types/actors"
 import Link from "next/link"
 import Image from "next/image"
@@ -23,11 +23,11 @@ export const ActorsList = () => {
             let data = null
             if (type === 'movies') {
 
-                data = await getCreditsCurrentMovie(id);
+                data = await getCreditsCurrentKino("movie" ,id);
             }
             if (type === 'series') {
 
-                data = await getCreditsCurrentSeries(id);
+                data = await getCreditsCurrentKino("tv", id);
             }
 
             setCredits(data)

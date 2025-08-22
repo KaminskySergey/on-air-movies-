@@ -1,19 +1,21 @@
 "use server"
-import { getKinoWithFilter, getMoviesGenres, getTopTrending } from '../../../../actions/movies'
-import { MoviesComponent } from '@/components/movies/movies-component';
+import { movieSortOptions } from '@/const/kino-sort';
+import { getKinoWithFilter, getKinoGenres, getTopTrending } from '../../../../actions/movies'
+import { KinoComponent } from '@/components/kino/kino-component';
 
 interface IMoviesPage {
     searchParams: Promise<{ [key: string]: string | undefined }>
 }
 
+
+
 export default async function MoviesPage({searchParams}: IMoviesPage) {
 
     const category = "movie"
-    const data = await getTopTrending({ type: "movie" });
-    const genres = await getMoviesGenres()
+    const data = await getTopTrending({ type: category });
+    const genres = await getKinoGenres(category)
     const filters = (await searchParams)
-console.log(filters)
-   const items = await getKinoWithFilter("movie", {
+   const items = await getKinoWithFilter(category, {
     page: filters.page || 1,
     sort_by: filters.sortBy as string,
     with_genres: filters.genres as string,
@@ -21,6 +23,6 @@ console.log(filters)
     query: filters.search as string
    })
     return (
-       <MoviesComponent genresData={genres.genres} items={items} category={category} moviesTrending={data.results} />
+       <KinoComponent sortItems={movieSortOptions} genresData={genres.genres} items={items} category={category} moviesTrending={data.results} />
     )
 }

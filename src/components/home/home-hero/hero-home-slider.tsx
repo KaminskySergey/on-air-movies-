@@ -10,6 +10,7 @@ import { List } from "../../ui/list/list"
 import { GenresItem } from "../../ui/genres/genres-item"
 import { Container } from "../../ui/container"
 import { useState } from "react"
+import { GENRES } from "@/const/genres"
 
 interface IHeroHomeSlider {
     data: IHeroInfo[]
@@ -86,7 +87,7 @@ export const HeroHomeSlider = ({ data }: IHeroHomeSlider) => {
                             className="flex flex-wrap gap-2 sm:gap-3"
                         >
                             {movie.genre_ids.map((id) => (
-                                <GenresItem text={getGenreName(id)} key={id} />
+                                <GenresItem text={getGenreName(GENRES, id)} key={id} />
                             ))}
                         </List>
 

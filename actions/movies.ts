@@ -31,49 +31,46 @@ export const getTopTrending = async ({
   return response;
 };
 
-export const getTopRatedDetailsMovie = async (movieId: string | undefined) => {
-  const response = await fetcher<IMovieDetails>(`movie/${movieId}`);
-  return response;
-};
-
-export const getTopRatedDetailsSeries = async (
-  seriesId: string | undefined
+export const getTopRatedDetailsKino = async (
+  type: "movie" | "tv",
+  movieId: string | undefined
 ) => {
-  const response = await fetcher<IMovieDetails>(`tv/${seriesId}`);
+  const response = await fetcher<IMovieDetails>(`${type}/${movieId}`);
   return response;
 };
 
-export const getCreditsCurrentMovie = async (movieId: string | null) => {
-  const response = await fetcher<ICredits>(`movie/${movieId}/credits`);
+export const getCreditsCurrentKino = async (type: "movie" | "tv", movieId: string | null) => {
+  const response = await fetcher<ICredits>(`${type}/${movieId}/credits`);
   return response;
 };
 
-export const getCreditsCurrentSeries = async (seriesId: string | null) => {
-  const response = await fetcher<ICredits>(`tv/${seriesId}/credits`);
-  return response;
-};
-
-export const getTrailer = async (type: string, id: string | null) => {
-  const typePath =
-    type === "movies" ? "movie" : type === "series" ? "tv" : "movie";
-  const response = await fetcher<IVideoTrailer>(`${typePath}/${id}/videos`);
-  return response;
-};
-
-export const getMoviesImages = async (movieId: string | null) => {
+export const getKinoImages = async (type: "movie" | "tv", movieId: string | null) => {
   const response = await fetcher<IMovieImages>(
-    `movie/${movieId}/images?language=en`
+    `${type}/${movieId}/images?language=en`
   );
   return response;
 };
 
-export const getHeroInfoMovies = async (movieId: string) => {
+
+
+
+export const getHeroInfoKino = async (
+  type: "movie" | "tv",
+  movieId: string
+  ) => {
   const [details, credits, images] = await Promise.all([
-    getTopRatedDetailsMovie(movieId),
-    getCreditsCurrentMovie(movieId),
-    getMoviesImages(movieId),
+    getTopRatedDetailsKino(type, movieId),
+    getCreditsCurrentKino(type, movieId),
+    getKinoImages(type, movieId),
   ]);
   return { details, credits, images };
+};
+
+
+export const getTrailer = async (type: string, id: string | null) => {
+  
+  const response = await fetcher<IVideoTrailer>(`${type}/${id}/videos`);
+  return response;
 };
 
 export const getKinoWithFilter = async (
@@ -85,7 +82,7 @@ export const getKinoWithFilter = async (
       query: String(params.query),
       page: String(params.page || 1),
     });
-console.log(params, 'dfvdfvdfvdfvdfvdfvd')
+
     return fetcher<IMovies>(`search/${type}?${query}`, {
       cache: "no-store",
     });
@@ -102,9 +99,9 @@ console.log(params, 'dfvdfvdfvdfvdfvdfvd')
   }
 };
 
-export const getMoviesGenres = async () => {
-  const response = await fetcher<IGenresList>('genre/movie/list', {
-    next: {revalidate: 60 * 60 * 24 * 7}
-  })
-  return response
-}
+export const getKinoGenres = async (type: "movie" | "tv") => {
+  const response = await fetcher<IGenresList>(`genre/${type}/list`, {
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
+  return response;
+};

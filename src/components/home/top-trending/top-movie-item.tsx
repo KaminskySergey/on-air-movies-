@@ -30,7 +30,8 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
     async function handleOpenTrailer() {
         // setLoading(true);
         try {
-            const res = await getTrailer(type, id);
+            const mappedType = type === "movies" ? "movie" : "tv";
+            const res = await getTrailer(mappedType, id);
             setTrailerKey(res.results[0].key);
             handleChange()
         } catch (error) {

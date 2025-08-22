@@ -6,19 +6,19 @@ import { IGenres } from "@/types/genres"
 import { IMovies } from "@/types/popular-movies"
 import { IKinoSort } from "@/types/sort"
 
-interface IMoviesSection {
+interface IKinoSection {
     items: IMovies,
     sortItems: IKinoSort[]
     genresData: IGenres[]
 }
 
-export const MoviesSection = ({genresData, items, sortItems }: IMoviesSection) => {
+export const KinoSection = ({ genresData, items, sortItems }: IKinoSection) => {
 
     return (
         <Container className="flex flex-col gap-8">
-            <KinoFilter genresData={genresData} sortItems={sortItems}/>
-           <KinoList items={items.results}/>
-<Pagination data={items}/>
+            <KinoFilter genresData={genresData} sortItems={sortItems} />
+            <KinoList items={items.results} />
+            <Pagination data={items} />
         </Container>
 
     )

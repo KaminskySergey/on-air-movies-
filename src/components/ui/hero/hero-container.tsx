@@ -18,6 +18,7 @@ import { useState } from "react"
 import { useToggle } from "@/hooks/use-toggle"
 import { getTrailer } from "../../../../actions/movies"
 import { SkeletonPosters } from "../spinner/skeleton-posters"
+import { IGenres } from "@/types/genres"
 
 interface IHeroContainer {
     item: IMovie
@@ -25,9 +26,10 @@ interface IHeroContainer {
     isLoadingDetails: boolean
     outerSwiperRef: React.MutableRefObject<SwiperCore | null>
     category: string
+    genresData: IGenres[]
 }
 
-export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
+export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
     const { isToggle, handleToggle } = useToggle()
     const [trailerKey, setTrailerKey] = useState<string | null>(null);
     async function handleOpenTrailer() {
@@ -47,7 +49,7 @@ export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isL
         <div className="relative w-full h-full">
             <Image
                 src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
-                alt={item.title}
+                alt={item.title || item.original_title || item.name || item.id.toString()}
                 fill
                 className="object-cover object-top"
                 priority
@@ -95,16 +97,20 @@ export const HeroContainer = ({ category, outerSwiperRef, item, heroDetails, isL
                                 className="flex flex-wrap  gap-2 sm:gap-3"
                             >
                                 {item.genre_ids.map((id) => (
-                                    <GenresItem text={getGenreName(id)} key={id} />
+                                    <GenresItem text={getGenreName(genresData, id)} key={id} />
                                 ))}
                             </List>
 
                             <div className="flex items-center">
                                 <span className="text-white mr-2 md:mr-4">•</span>
-                                <span >
-                                    {heroDetails?.runtime ? formatRuntime(heroDetails.runtime) : ""}
-                                </span>
-
+                                
+                                {heroDetails?.runtime ? (
+                                    <span className="text-xs sm:text-sm text-gray-200">{formatRuntime(heroDetails.runtime)}</span>
+                                ) : (
+                                    <span className="text-xs sm:text-sm text-gray-200">
+                                        {heroDetails?.number_of_seasons} Season(s), {heroDetails?.number_of_episodes} Episode(s)
+                                    </span>
+                                )}
                             </div>
                         </div>
 

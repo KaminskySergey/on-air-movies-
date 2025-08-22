@@ -14,14 +14,18 @@ export const KinoItem = ({ el }: IKinoItem) => {
     const imageUrl = el.poster_path || el.backdrop_path
         ? `https://image.tmdb.org/t/p/${el.poster_path ? 'w500' : 'original'}${el.poster_path || el.backdrop_path}`
         : "/placeholder.png";
-
     return (
         <li key={el.id} className="">
             <Link href={'#'} className="">
                 <div className="relative  aspect-[2/3] rounded-3xl overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105">
                     <Image
                         src={imageUrl}
-                        alt={el.title}
+                        alt={
+                            el.title ||
+                            el.original_title ||
+                            el.name ||
+                            "Poster image"
+                          }
                         fill
                         sizes="(max-width: 640px) 100vw,
            (max-width: 1024px) 33vw, 
@@ -30,7 +34,7 @@ export const KinoItem = ({ el }: IKinoItem) => {
                     />
                     <div className="absolute bottom-0 left-0 w-full h-20 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">
                         <h3 className="text-white font-semibold text-center text-sm line-clamp-2">
-                            {el.title}
+                            {el.title || el.name}
                         </h3>
                         <span className="text-gray-300 text-xs mt-1">
                             {getYearFromDate(el.release_date || el.first_air_date)}

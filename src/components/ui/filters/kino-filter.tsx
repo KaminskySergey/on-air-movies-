@@ -26,7 +26,6 @@ export const KinoFilter = ({ genresData, sortItems }: IKinoFilter) => {
       }
     }, [searchParams, setFilters]);
   
-    console.log(filters, 'filtersfiltersfilters')
     return (
         <div className="flex flex-col gap-4 sm:gap-8">
             <div className="flex flex-col sm:justify-between sm:flex-row gap-4 items-center">

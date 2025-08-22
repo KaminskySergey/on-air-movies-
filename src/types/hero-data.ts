@@ -21,6 +21,8 @@ export interface IHeroInfo {
 
 export interface IHeroDetails {
   cast: IActor[];
-  runtime: number | null;
+  runtime: number | undefined | null;
+  number_of_episodes: number | undefined,
+  number_of_seasons: number | undefined,
   backdrops: IImage[];
 }

@@ -23,74 +23,86 @@ export const KinoDetailsRecommendations = ({ category, recommendations }: IKinoD
     return (
         <Container className="flex flex-col gap-5">
             <TitleLinie title="Recommendations" />
-            <div className="relative overflow-hidden h-64">
+            {recommendations.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-64 bg-gray-800 rounded-lg shadow-md p-4 text-center">
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                        No recommendations available
+                    </h3>
+                    <p className="text-gray-400 text-sm sm:text-base mt-1">
+                        Check back later for more movies or series you might like.
+                    </p>
+                </div>
+            ) : (
+                <div className="relative overflow-hidden h-64">
 
-                {
-                    !isSwiper && <Spinner />
-                }
-                <Swiper
-                    modules={[Navigation]}
-                    navigation={{ prevEl: ".arrow-left", nextEl: ".arrow-right" }}
-                    spaceBetween={20}
-                    onSwiper={() => setIsSwiper(true)}
-                    slidesPerView={2}
-                    loop={true}
-                    breakpoints={{
-                        640: { slidesPerView: 3 },
-                        1024: { slidesPerView: 4 },
-                    }}
-                >
-                    {recommendations.map((el) => (
-                        <SwiperSlide key={el.id}>
-                            {isSwiper && <Link  href={`/${category === "tv" ? "series" : "movies"}/${el.id}`}>
-                            <div className="relative w-full h-64 rounded-lg group overflow-hidden shadow-md">
-                                
-                                    <Image
-                                        fill
-                                        alt={el.title}
-                                        src={el.poster_path
-                                            ? `https://image.tmdb.org/t/p/w500${el.poster_path}`
-                                            : "/placeholder.png"}
-                                        className="object-cover object-center transition-transform duration-300 ease-linear group-hover:scale-105 group-hover:brightness-90"
-                                        sizes="48"
-                                    />
+                    {
+                        !isSwiper && <Spinner />
+                    }
+                    <Swiper
+                        modules={[Navigation]}
+                        navigation={{ prevEl: ".arrow-left", nextEl: ".arrow-right" }}
+                        spaceBetween={20}
+                        onSwiper={() => setIsSwiper(true)}
+                        slidesPerView={2}
+                        loop={true}
+                        breakpoints={{
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                        }}
+                    >
+                        {recommendations.map((el) => (
+                            <SwiperSlide key={el.id}>
+                                {isSwiper && <Link href={`/${category === "tv" ? "series" : "movies"}/${el.id}`}>
+                                    <div className="relative w-full h-64 rounded-lg group overflow-hidden shadow-md">
 
-                                    <div className="absolute bottom-0 left-0 w-full h-14 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">
-                                        <h3 className="text-white font-semibold text-center text-sm line-clamp-2">
-                                            {el.title || el.name}
-                                        </h3>
-                                        <span className="text-gray-300 text-xs mt-1">
-                                            {getYearFromDate(el.release_date || el.first_air_date)}
-                                        </span>
+                                        <Image
+                                            fill
+                                            alt={el.title}
+                                            src={el.poster_path
+                                                ? `https://image.tmdb.org/t/p/w500${el.poster_path}`
+                                                : "/placeholder.png"}
+                                            className="object-cover object-center transition-transform duration-300 ease-linear group-hover:scale-105 group-hover:brightness-90"
+                                            sizes="48"
+                                        />
+
+                                        <div className="absolute bottom-0 left-0 w-full h-14 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">
+                                            <h3 className="text-white font-semibold text-center text-sm line-clamp-2">
+                                                {el.title || el.name}
+                                            </h3>
+                                            <span className="text-gray-300 text-xs mt-1">
+                                                {getYearFromDate(el.release_date || el.first_air_date)}
+                                            </span>
+                                        </div>
+                                        <div className={cn(
+                                            "absolute top-2 right-2 bg-black text-white text-xs font-bold w-8 h-8 flex items-center justify-center rounded-full border-2",
+                                            {
+                                                "border-red-600": el.vote_average <= 4,
+                                                "border-yellow-400": el.vote_average > 4 && el.vote_average < 7,
+                                                "border-green-500": el.vote_average >= 7,
+                                            }
+                                        )}>
+                                            {el.vote_average !== undefined && el.vote_average !== null
+                                                ? el.vote_average.toFixed(1)
+                                                : "N/A"}
+                                        </div>
                                     </div>
-                                    <div className={cn(
-                                        "absolute top-2 right-2 bg-black text-white text-xs font-bold w-8 h-8 flex items-center justify-center rounded-full border-2",
-                                        {
-                                            "border-red-600": el.vote_average <= 4,
-                                            "border-yellow-400": el.vote_average > 4 && el.vote_average < 7,
-                                            "border-green-500": el.vote_average >= 7,
-                                        }
-                                    )}>
-                                        {el.vote_average !== undefined && el.vote_average !== null
-                                            ? el.vote_average.toFixed(1)
-                                            : "N/A"}
-                            </div>
-                            </div>
                                 </Link>}
-                </SwiperSlide>
-                    ))}
-                
-                    <ButtonSwiper className="arrow-left left-4">
-                        <ArrowLeftSwiper />
-                    </ButtonSwiper>
+                            </SwiperSlide>
+                        ))}
 
-                    <ButtonSwiper className="arrow-right right-4">
-                        <ArrowRightSwiper />
-                    </ButtonSwiper>
-                
-            </Swiper>
+                        <ButtonSwiper className="arrow-left left-4">
+                            <ArrowLeftSwiper />
+                        </ButtonSwiper>
 
-        </div>
+                        <ButtonSwiper className="arrow-right right-4">
+                            <ArrowRightSwiper />
+                        </ButtonSwiper>
+
+                    </Swiper>
+
+                </div>
+            )
+            }
         </Container >
     )
 }

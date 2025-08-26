@@ -32,7 +32,7 @@ export const KinoMediaTabs = ({ mediaKinoDetails, counts, kinoId }: IKinoMediaTa
         <>
             <Container className="flex flex-col item gap-5">
                 <TitleLinie title="Media" />
-                {/* Tabs */}
+
                 <div className="flex justify-center">
                     <List className="flex  bg-gray-800 rounded-lg py-1 px-1">
                         {tabs.map(tab => (
@@ -52,7 +52,6 @@ export const KinoMediaTabs = ({ mediaKinoDetails, counts, kinoId }: IKinoMediaTa
                     </List>
                 </div>
 
-                {/* Content */}
                 <div className="min-h-[150px]">
                     {activeTab === "posters" && <KinoDetailsTabsList kinoId={kinoId} type="posters" items={posters.slice(0, 11)} />}
                     {activeTab === "backdrops" && <KinoDetailsTabsList kinoId={kinoId} type="backdrops" items={backdrops.slice(0, 11)} />}

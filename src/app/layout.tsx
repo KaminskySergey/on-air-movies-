@@ -39,7 +39,9 @@ export default function RootLayout({
         className={`${inter.variable} ${roboto.variable}`}
       >
         <Header />
-        {children}
+        <main>
+          {children}
+        </main>
         <Footer />
         <div id="root_modal" />
       </body>

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { IPerson } from '@/types/people';
 import Image from "next/image";
 import { useResponsiveCount } from "@/hooks/use-responsive";
+import { Spinner } from "@/components/ui/spinner/spinner";
 
 interface ITopPeopleSwiper {
     setActivePerson: (person: IPerson) => void
@@ -60,7 +61,7 @@ export function TopPeopleSwiper({ setActivePerson, people }: ITopPeopleSwiper) {
                             )}
                         >
                             {!isSwiper ? (
-                                <div className="text-white">Loading.....</div>
+                                <Spinner />
                             ) : (
                                 <>
                                     <div className="relative w-full h-full">

@@ -31,7 +31,7 @@ export const getTopTrending = async ({
   return response;
 };
 
-export const getTopRatedDetailsKino = async (
+export const getDetailsKino = async (
   type: "movie" | "tv",
   movieId: string | undefined
 ) => {
@@ -51,6 +51,21 @@ export const getKinoImages = async (type: "movie" | "tv", movieId: string | null
   return response;
 };
 
+export const getKinoVideos = async (type: "movie" | "tv", movieId: string | null) => {
+  const response = await fetcher<IVideoTrailer>(
+    `${type}/${movieId}/videos`
+  );
+  return response;
+};
+
+export const getKinoRecommendations = async (type: "movie" | "tv", movieId: string | null) => {
+  const response = await fetcher<IMovies>(
+    `${type}/${movieId}/recommendations`
+  );
+  return response;
+};
+
+
 
 
 
@@ -59,7 +74,7 @@ export const getHeroInfoKino = async (
   movieId: string
   ) => {
   const [details, credits, images] = await Promise.all([
-    getTopRatedDetailsKino(type, movieId),
+    getDetailsKino(type, movieId),
     getCreditsCurrentKino(type, movieId),
     getKinoImages(type, movieId),
   ]);

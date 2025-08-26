@@ -1,5 +1,3 @@
-import { ReactNode } from "react"
-import { List } from "./list"
 import Link from "next/link"
 import Image from "next/image"
 import { IMovie } from "@/types/popular-movies"
@@ -7,16 +5,17 @@ import { cn, getYearFromDate } from "@/utils/utils"
 
 interface IKinoItem {
     el: IMovie
+    category: "movie" | "tv"
 }
 
-export const KinoItem = ({ el }: IKinoItem) => {
+export const KinoItem = ({category, el }: IKinoItem) => {
 
     const imageUrl = el.poster_path || el.backdrop_path
         ? `https://image.tmdb.org/t/p/${el.poster_path ? 'w500' : 'original'}${el.poster_path || el.backdrop_path}`
         : "/placeholder.png";
     return (
         <li key={el.id} className="">
-            <Link href={'#'} className="">
+            <Link href={`/${category === "tv" ? "series" : "movies"}/${el.id}`} className="">
                 <div className="relative  aspect-[2/3] rounded-3xl overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105">
                     <Image
                         src={imageUrl}

@@ -22,7 +22,7 @@ export const KinoComponent = ({sortItems, genresData, items, category, moviesTre
             <section className="relative bg-[#01001F] py-8">
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#01001F] via-[#01001F] to-[#01001F]"></div>
 
-                <KinoSection genresData={genresData} items={items} sortItems={sortItems} />
+                <KinoSection category={category} genresData={genresData} items={items} sortItems={sortItems} />
             </section>
         </>
     )

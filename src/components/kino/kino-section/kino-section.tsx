@@ -10,14 +10,15 @@ interface IKinoSection {
     items: IMovies,
     sortItems: IKinoSort[]
     genresData: IGenres[]
+    category: "movie" | "tv"
 }
 
-export const KinoSection = ({ genresData, items, sortItems }: IKinoSection) => {
+export const KinoSection = ({category, genresData, items, sortItems }: IKinoSection) => {
 
     return (
         <Container className="flex flex-col gap-8">
             <KinoFilter genresData={genresData} sortItems={sortItems} />
-            <KinoList items={items.results} />
+            <KinoList category={category} items={items.results} />
             <Pagination data={items} />
         </Container>
 

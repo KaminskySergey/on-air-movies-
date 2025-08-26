@@ -11,14 +11,12 @@ import SwiperCore from 'swiper';
 import { SkeletonWrapper } from "../spinner/skeleton-wrapper"
 import { IHeroDetails } from "@/types/hero-data"
 import { HeroPosters } from "./hero-posters"
-import { PlayHeroIcon } from "../svg/play-hero"
 import Modal from "../modal/modal"
 import { Trailer } from "../trailer/trailer"
-import { useState } from "react"
-import { useToggle } from "@/hooks/use-toggle"
-import { getTrailer } from "../../../../actions/movies"
 import { SkeletonPosters } from "../spinner/skeleton-posters"
 import { IGenres } from "@/types/genres"
+import { ButtonTrailer } from "../button/button-trailer"
+import { useTrailer } from "@/hooks/use-trailer"
 
 interface IHeroContainer {
     item: IMovie
@@ -30,20 +28,7 @@ interface IHeroContainer {
 }
 
 export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
-    const { isToggle, handleToggle } = useToggle()
-    const [trailerKey, setTrailerKey] = useState<string | null>(null);
-    async function handleOpenTrailer() {
-        // setLoading(true);
-        try {
-            const res = await getTrailer(category, item.id.toString());
-            setTrailerKey(res.results[0].key);
-            handleToggle()
-        } catch (error) {
-            console.log((error as Error).message);
-        } finally {
-            // setLoading(false);
-        }
-    }
+    const { trailerKey, isToggle, handleOpenTrailer, handleToggle } = useTrailer(category, item.id);
 
     return <>
         <div className="relative w-full h-full">
@@ -133,13 +118,7 @@ export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroD
                             {heroDetails && <ActorsListHero isLoadingDetails={isLoadingDetails} cast={heroDetails?.cast} />}
                         </div>
                         <div>
-                            <button
-                                onClick={handleOpenTrailer}
-                                className=" flex justify-center  gap-2 items-center w-[128px] h-[32px]  md:w-[156px] md:h-[50px] cursor-pointer rounded-lg bg-blue-500 py-1 px-3  md:py-3 md:px-6 font-sans  font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            >
-                                <PlayHeroIcon />
-                                <p className="text-[10px] md:text-base">Trailer</p>
-                            </button>
+                            <ButtonTrailer handleOpenTrailer={handleOpenTrailer}/>
                         </div>
                     </div>
                     <div

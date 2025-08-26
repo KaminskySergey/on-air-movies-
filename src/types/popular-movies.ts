@@ -39,6 +39,7 @@ export interface IMovies {
     name?: string;
     runtime?: number;
     vote_average: number;
+    vote_count: number;
     backdrop_path: string
     original_language: string
     origin_country: string[]

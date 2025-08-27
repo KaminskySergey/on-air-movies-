@@ -24,7 +24,6 @@ interface IKinoDetails {
 export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, counts, kinoId, cast, category, detailsInfo }: IKinoDetails) => {
 
     const backdropUrl = `https://image.tmdb.org/t/p/original${detailsInfo.backdrop_path}`;
-    console.log(detailsInfo, 'detailsInfodetailsInfo')
 
 
 
@@ -35,7 +34,7 @@ export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, c
             >
                 <Image
                     src={backdropUrl}
-                    alt={detailsInfo.title}
+                    alt={detailsInfo.title || detailsInfo.name || detailsInfo.id.toString()}
                     fill
                     className="object-cover object-top"
                     priority

@@ -26,7 +26,7 @@ export const KinoDetailsInfo = ({ category, item }: IKinoDetailsInfo) => {
             <div className="relative hidden sm:block z-10 w-[300px] h-[500px] flex-shrink-0">
                 <Image
                     src={posterUrl}
-                    alt={item.title}
+                    alt={item.title || item.name || item.id.toString()}
                     fill
                     className="object-cover rounded-2xl shadow-lg"
                     sizes="48"
@@ -35,7 +35,7 @@ export const KinoDetailsInfo = ({ category, item }: IKinoDetailsInfo) => {
             <div className="text-white lg:py-3  flex flex-col gap-4 lg:gap-5">
                 <div >
                     <h2 className="text-xl sm:text-3xl md:text-5xl  font-bold">
-                        {item.title}
+                        {item.title || item.name}
                         {/* <span className="pl-2 font-medium text-gray-500 ">{`(${item.release_date.split("-")[0]})`}</span> */}
                     </h2>
 
@@ -52,8 +52,7 @@ export const KinoDetailsInfo = ({ category, item }: IKinoDetailsInfo) => {
 
 
                         <span>
-                            {formatDate(item.release_date)}
-
+                            {formatDate(item.release_date ?? item.first_air_date ?? "")}
                         </span>
 
                         <span className="text-white ml-2 md:ml-4">•</span>

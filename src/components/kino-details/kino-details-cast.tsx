@@ -28,7 +28,7 @@ export const KinoDetailsCast = ({ kinoId, cast }: IKinoDetailsCast) => {
                             <div className="relative h-[220px] sm:h-[240px] md:h-[260px] rounded-t-xl overflow-hidden">
                                 {el.profile_path ? (
                                     <Image
-                                        alt={el.original_name || el.id.toString()}
+                                        alt={el.original_name || el.name || el.id.toString()}
                                         fill
                                         src={`https://image.tmdb.org/t/p/w500${el.profile_path}`}
                                         className="object-cover transition-transform duration-500 hover:scale-105"

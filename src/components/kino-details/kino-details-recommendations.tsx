@@ -57,7 +57,7 @@ export const KinoDetailsRecommendations = ({ category, recommendations }: IKinoD
 
                                         <Image
                                             fill
-                                            alt={el.title}
+                                            alt={el.title || el.name || el.id.toString()}
                                             src={el.poster_path
                                                 ? `https://image.tmdb.org/t/p/w500${el.poster_path}`
                                                 : "/placeholder.png"}

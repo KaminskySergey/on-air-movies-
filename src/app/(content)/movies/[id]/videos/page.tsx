@@ -14,7 +14,7 @@ export default async function VideosSectionPage({ params }: IVideosSectionPage) 
     const videos = await getKinoVideos(category, id)
 
     return (
-        <KinoSectionLayout category={category} id={id}>
+        <KinoSectionLayout section={"videos"} category={category} id={id}>
           <KinoVideosGallery videos={videos.results}/>
         </KinoSectionLayout>
     )

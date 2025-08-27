@@ -65,7 +65,7 @@ export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroD
                                 className="text-2xl sm:text-3xl md:text-5xl font-bold"
 
                             >
-                                {item.title}
+                                {item.title || item.name}
                             </h2>
 
                         </div>

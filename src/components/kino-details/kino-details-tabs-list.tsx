@@ -4,7 +4,6 @@ import { List } from "../ui/list/list"
 import { TMDBimgMedium, TMDBimgOriginal } from "@/const/tmdb-img"
 import { IImage, IKinoVideo } from "@/types/images"
 import { useState } from "react"
-import ReactPlayer from "react-player";
 import { useToggle } from "@/hooks/use-toggle"
 import Modal from "../ui/modal/modal"
 import { Trailer } from "../ui/trailer/trailer"
@@ -13,28 +12,29 @@ import NextJsImageBox from "../ui/image/next-image-lightbox"
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
 import Link from "next/link"
 import { ArrowRight } from "../ui/svg/arrow-right"
+import { useCustomSearchParams } from "@/hooks/use-search-params"
+import { getVideoThumbnail } from "@/utils/utils"
 
 type KinoDetailsTabsListProps =
     | { type: "videos"; items: IKinoVideo[], kinoId: string }
     | { type: "posters"; items: IImage[], kinoId: string }
     | { type: "backdrops"; items: IImage[], kinoId: string };
 
-function getVideoThumbnail(site: string, key: string): string {
-    if (site === "YouTube") {
-        return `https://img.youtube.com/vi/${key}/hqdefault.jpg`;
-    }
-    return "/placeholder.png";
-}
+
 
 
 export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsListProps) => {
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
     const { isToggle, setIsToggle } = useToggle()
     const [isOpen, setIsOpen] = useState(false)
+    const {pathname} = useCustomSearchParams()
+
+    const category = pathname.match(/^\/(movies|series)/)?.[1];
+
+
     const handleOpenBox = () => {
         setIsOpen(true)
     }
-
     const toggleVideoModal = (value?: string) => {
         if (value) {
             setActiveVideo(value);
@@ -91,14 +91,14 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
                             </div>
                         </li>
                     ))}
-                <li className="shadow-xl flex-shrink-0">
+                {items.length >= 10 && <li className="shadow-xl flex-shrink-0">
                     <Link
                         href={
                             type === "videos"
-                                ? `/movies/${kinoId}/videos`
+                                ? `/${category}/${kinoId}/videos`
                                 : type === "posters"
-                                    ? `/movies/${kinoId}/posters`
-                                    : `/movies/${kinoId}/backdrops`
+                                    ? `/${category}/${kinoId}/images/posters`
+                                    : `/${category}/${kinoId}/images/backdrops`
                         }
                     >
                         <div className="relative  h-64 rounded-lg flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 transition">
@@ -106,20 +106,20 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
                             <ArrowRight />
                         </div>
                     </Link>
-                </li>
+                </li>}
             </List>
             {isToggle && (
                 <Modal isOpen={isToggle} isTrailer onClose={toggleVideoModal}>
                     <Trailer trailerKey={activeVideo} />
                 </Modal>
             )}
-            <Lightbox
+            {isOpen && <Lightbox
                 open={isOpen}
                 close={() => setIsOpen(false)}
                 slides={slides}
                 render={{ slide: NextJsImageBox, thumbnail: NextJsImageBox }}
                 plugins={[Thumbnails]}
-            />
+            />}
         </>
     );
 }

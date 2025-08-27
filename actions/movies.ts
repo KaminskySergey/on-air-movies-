@@ -44,9 +44,9 @@ export const getCreditsCurrentKino = async (type: "movie" | "tv", movieId: strin
   return response;
 };
 
-export const getKinoImages = async (type: "movie" | "tv", movieId: string | null) => {
+export const getKinoImages = async (type: "movie" | "tv", movieId: string | null, options?: RequestInit) => {
   const response = await fetcher<IMovieImages>(
-    `${type}/${movieId}/images?language=en`
+    `${type}/${movieId}/images?language=en`, options
   );
   return response;
 };

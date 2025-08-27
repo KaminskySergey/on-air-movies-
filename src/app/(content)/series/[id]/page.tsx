@@ -14,6 +14,7 @@ export default async function SeriesDetailsPage({ params }: ISeriesDetailsPage) 
     const { id } = await params
 
     const detailsInfo = await getDetailsKino(category, id)
+
     const credits = await getCreditsCurrentKino(category, id)
 
     const images = await getKinoImages(category, id)

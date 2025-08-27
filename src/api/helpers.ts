@@ -1,4 +1,5 @@
 import { API_KEY, BASIC_URL } from "@/const/server-base-url";
+import { notFound } from "next/navigation";
 
 export async function fetcher<T>(
   endpoint: string,
@@ -17,9 +18,11 @@ export async function fetcher<T>(
 
   const res = await fetch(url.toString(), options);
   if (!res.ok) {
+    if (res.status === 404) {
+      notFound(); 
+    }
     const errorData = await res.json().catch(() => null);
-    const message =
-      errorData?.status_message || res.statusText || "Request error";
+    const message = errorData?.status_message || res.statusText || "Request error";
     throw new Error(message);
   }
 

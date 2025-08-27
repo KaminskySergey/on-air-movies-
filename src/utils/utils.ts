@@ -46,3 +46,14 @@ export function formatRuntime(runtime: number) {
   const minutes = runtime % 60;
   return `${hours}h ${minutes}m`;
 }
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function getVideoThumbnail(site: string, key: string): string {
+  if (site === "YouTube") {
+      return `https://img.youtube.com/vi/${key}/hqdefault.jpg`;
+  }
+  return "/placeholder.png";
+}

@@ -8,9 +8,9 @@ interface ICastSectionPage {
     }>
 }
 
-export default async function MoviesCastSectionPage({ params }: ICastSectionPage) {
+export default async function SeriesCastSectionPage({ params }: ICastSectionPage) {
     const {id} = await params
-    const category = "movie"
+    const category = "tv"
     const credits = await getCreditsCurrentKino(category, id)
     return (
         <KinoSectionLayout section={"credits"} category={category} id={id}>

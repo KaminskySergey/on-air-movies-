@@ -8,7 +8,7 @@ interface IKinoSectionLayout {
   children: React.ReactNode
   category: "movie" | "tv"
   id: string
-  section: "posters" | "backdrops" | "videos"
+  section: "posters" | "backdrops" | "videos" | "credits"
 }
 
 export async function KinoSectionLayout({

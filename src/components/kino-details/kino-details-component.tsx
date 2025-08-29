@@ -51,7 +51,7 @@ export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, c
                 </Container>
             </section>
             <section className="bg-black py-[32px]">
-                <KinoDetailsCast kinoId={kinoId} cast={cast} />
+                <KinoDetailsCast category={category} kinoId={kinoId} cast={cast} />
             </section>
             <section className="bg-black py-[32px]">
                <KinoMediaTabs mediaKinoDetails={mediaKinoDetails} kinoId={kinoId} counts={counts}/>

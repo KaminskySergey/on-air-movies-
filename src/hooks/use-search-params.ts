@@ -17,8 +17,22 @@ export const useCustomSearchParams = () => {
         [searchParams]
     )
 
+    const createQueryStringMultiple = useCallback(
+        (name: string, values: string[]) => {
+          const params = new URLSearchParams(searchParams.toString());
+          if (values.length > 0) {
+            params.set(name, values.join(","));
+          } else {
+            params.delete(name);
+          }
+          return params.toString();
+        },
+        [searchParams]
+      );
+
     return {
         createQueryString,
+        createQueryStringMultiple,
         router,
         pathname,
         searchParams

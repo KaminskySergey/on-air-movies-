@@ -9,9 +9,10 @@ import { TitleLinie } from "../ui/title/title-linie"
 interface IKinoDetailsCast {
     cast: IActor[]
     kinoId: string
+    category: "movie" | "tv"
 }
 
-export const KinoDetailsCast = ({ kinoId, cast }: IKinoDetailsCast) => {
+export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) => {
     const firstPartCast = cast.slice(0, 10)
 
     return (
@@ -57,7 +58,7 @@ export const KinoDetailsCast = ({ kinoId, cast }: IKinoDetailsCast) => {
                     </li>
                 ))}
                 <li className="shadow-xl flex-shrink-0">
-                    <Link href={`/movie/${kinoId}/cast`}>
+                    <Link href={`/${category === "tv" ? "series" : "movies"}/${kinoId}/credits`}>
                         <div className="relative w-[190px] h-full rounded-lg flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 transition">
                             <span className="text-white text-lg font-semibold">View More</span>
                             <ArrowRight />

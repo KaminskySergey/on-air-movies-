@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
 import { List } from "../ui/list/list"
-import { TMDBimgMedium, TMDBimgOriginal } from "@/const/tmdb-img"
+import {  TMDBimgOriginal } from "@/const/tmdb-img"
 import { IImage, IKinoVideo } from "@/types/images"
 import { useState } from "react"
 import { useToggle } from "@/hooks/use-toggle"

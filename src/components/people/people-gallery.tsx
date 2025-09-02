@@ -32,11 +32,12 @@ export const PeopleGallery = ({ data }: IPeopleGallery) => {
                                     ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
                                     : "/placeholder.png"
                             }
-                            alt={person.name}
+                            alt={person.name || "No name"}
                             fill
+                            unoptimized 
                             sizes="(max-width: 640px) 100vw,
-                     (max-width: 1024px) 33vw, 
-                     20vw"
+                   (max-width: 1024px) 33vw,
+                   20vw"
                             className="object-cover w-full h-full"
                         />
                         <div className="absolute bottom-0 left-0 w-full h-12 sm:h-[56px] flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">

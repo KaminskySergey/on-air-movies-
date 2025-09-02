@@ -46,7 +46,7 @@ export const ActorsList = () => {
         <List className="flex items-center -space-x-2">
             {visibleCast.map((el) => (
                 <li key={el.id} className="relative bg-black flex items-center justify-center hover:scale-125 hover:z-20 transition h-12 w-12 rounded-full border-2 border-blue-600 overflow-hidden">
-                    <Link href="#">
+                    <Link href={`/people/${el.id}`}>
                         <div className="relative w-10 h-10">
                             {el.profile_path ? (
                                 <Image

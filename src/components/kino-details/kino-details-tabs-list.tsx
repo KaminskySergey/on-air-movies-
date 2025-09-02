@@ -14,6 +14,7 @@ import Link from "next/link"
 import { ArrowRight } from "../ui/svg/arrow-right"
 import { useCustomSearchParams } from "@/hooks/use-search-params"
 import { getVideoThumbnail } from "@/utils/utils"
+import { NotItems } from "../ui/not-items/not-items"
 
 type KinoDetailsTabsListProps =
     | { type: "videos"; items: IKinoVideo[], kinoId: string }
@@ -52,7 +53,9 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
     }));
     return (
         <>
-            <List className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {items.length === 0 && <NotItems title={`No ${type} available`} 
+  text={`This section has no ${type} yet. Check back later.`} />}
+            {items.length !== 0 && <List className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {type === "videos" &&
                     items.map((video, idx) => (
                         <li key={video.id ?? idx}>
@@ -107,7 +110,7 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
                         </div>
                     </Link>
                 </li>}
-            </List>
+            </List>}
             {isToggle && (
                 <Modal isOpen={isToggle} isTrailer onClose={toggleVideoModal}>
                     <Trailer trailerKey={activeVideo} />

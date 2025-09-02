@@ -5,7 +5,7 @@ import { getPeopleDetailsId } from "../../../../actions/actors";
 import { IPersonDetails } from "@/types/people";
 
 interface ITopActorDetailsInfo {
-    personId: number
+    personId: number | string
  }
 
 export function TopActorDetailsInfo({ personId }: ITopActorDetailsInfo) {

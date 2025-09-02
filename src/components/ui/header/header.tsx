@@ -11,7 +11,7 @@ export const Header = () => {
 
     const pathname = usePathname();
 
-    const isMainPage = ["/", "/movies", "/series"].includes(pathname);
+    const isMainPage = ["/", "/movies", "/series",].includes(pathname)
 
     return <header className={cn(" w-full z-50  py-[8px]  md:py-[16px] lg:py-[16px] border-b-1 border-gray-800", {
         "bg-transparent absolute top-0 left-0": isMainPage,

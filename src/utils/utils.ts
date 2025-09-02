@@ -57,3 +57,31 @@ export function getVideoThumbnail(site: string, key: string): string {
   }
   return "/placeholder.png";
 }
+
+export function formatActorLife(birthday: string | null, deathday: string | null) {
+  if (!birthday) return null;
+
+  const birthDate = new Date(birthday);
+  const deathDate = deathday ? new Date(deathday) : new Date();
+
+  let age = deathDate.getFullYear() - birthDate.getFullYear();
+  const m = deathDate.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && deathDate.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const birthStr = birthDate.toLocaleDateString("en-US", options);
+
+  if (deathday) {
+    const deathStr = deathDate.toLocaleDateString("en-US", options);
+    return `${birthStr} – ${deathStr} (${age} years)`;
+  }
+
+  return `${birthStr} (age ${age})`;
+}

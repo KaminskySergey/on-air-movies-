@@ -12,6 +12,7 @@ import { ArrowLeftSwiper } from "../ui/svg/arrow-left-swiper"
 import { ButtonSwiper } from "../ui/button/button-swiper"
 import Link from "next/link"
 import { cn, getYearFromDate } from "@/utils/utils"
+import { NotItems } from "../ui/not-items/not-items"
 
 interface IKinoDetailsRecommendations {
     recommendations: IMovie[]
@@ -24,14 +25,7 @@ export const KinoDetailsRecommendations = ({ category, recommendations }: IKinoD
         <Container className="flex flex-col gap-5">
             <TitleLinie title="Recommendations" />
             {recommendations.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-64 bg-gray-800 rounded-lg shadow-md p-4 text-center">
-                    <h3 className="text-white font-semibold text-lg sm:text-xl">
-                        No recommendations available
-                    </h3>
-                    <p className="text-gray-400 text-sm sm:text-base mt-1">
-                        Check back later for more movies or series you might like.
-                    </p>
-                </div>
+                <NotItems title="No recommendations available" text="Check back later for more movies or series you might like."/>
             ) : (
                 <div className="relative overflow-hidden h-64">
 

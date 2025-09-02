@@ -1,12 +1,12 @@
 'use client'
 
-import { ICastMovies, ICrewMovies } from "@/types/actor-movie"
+import { IWorkMovies } from "@/types/actor-movie"
 import { ICastSeries, ICrewSeries } from "@/types/actor-series"
 import Image from "next/image"
 import Link from "next/link"
 
 interface IWorksItem {
-    item: ICastMovies | ICrewMovies | ICastSeries | ICrewSeries
+    item: IWorkMovies | ICastSeries | ICrewSeries
 
 }
 

@@ -25,7 +25,7 @@ export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) =>
                         key={el.id}
                         className="w-[160px] sm:w-[180px] md:w-[200px] flex-shrink-0 rounded-xl bg-white shadow-md hover:shadow-xl transition-shadow duration-300"
                     >
-                        <Link href={`/cast/${el.id}`} className="block">
+                        <Link href={`/people/${el.id}`} className="block">
                             <div className="relative h-[220px] sm:h-[240px] md:h-[260px] rounded-t-xl overflow-hidden">
                                 {el.profile_path ? (
                                     <Image

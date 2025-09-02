@@ -3,9 +3,10 @@
 import { IMovies } from "@/types/popular-movies"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { cn } from "@/utils/utils"
+import { IPeoplePupular } from "@/types/people"
 
 interface IPagination {
-    data: IMovies
+    data: IMovies | IPeoplePupular
 }
 
 export const Pagination = ({ data }: IPagination) => {

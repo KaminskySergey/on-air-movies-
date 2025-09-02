@@ -48,7 +48,7 @@ export const ActorsListHero = ({ cast, isLoadingDetails }: IActorsListHero) => {
                         key={el.id}
                         className="-ml-2 first:ml-0 flex-shrink-0 bg-black flex items-center justify-center hover:scale-110 hover:z-20 transition h-12 w-12 rounded-full border-2 border-blue-600 overflow-hidden"
                     >
-                        <Link href="#">
+                        <Link href={`/people/${el.id}`}>
                             <div className="relative w-10 h-10 md:w-12 md:h-12 flex justify-center items-center">
                                 {el.profile_path ? (
                                     <Image

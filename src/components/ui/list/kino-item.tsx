@@ -29,9 +29,9 @@ export const KinoItem = ({category, el }: IKinoItem) => {
                         sizes="(max-width: 640px) 100vw,
            (max-width: 1024px) 33vw, 
            20vw"
-                        className="object-cover  w-full h-full"
+                        className="object-cover"
                     />
-                    <div className="absolute bottom-0 left-0 w-full h-20 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">
+                    <div className="absolute bottom-0 left-0 w-full h-12 sm:h-20 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">
                         <h3 className="text-white font-semibold text-center text-sm line-clamp-2">
                             {el.title || el.name}
                         </h3>

@@ -1,3 +1,6 @@
+import { IWorkMovies } from "./actor-movie";
+import { IWorkSeries } from "./actor-series";
+
 export interface IPeoplePupular {
 page: number,
 results: IPerson[]
@@ -18,7 +21,7 @@ export interface IPerson {
     known_for: IKnownForWork[];
   }
   
-   interface IKnownForWork {
+   export interface IKnownForWork {
     adult: boolean;
     backdrop_path: string | null;
     genre_ids: number[];
@@ -53,4 +56,11 @@ export interface IPerson {
     place_of_birth: string | null; 
     popularity: number; 
     profile_path: string | null;
+    imgLocal?: string;
+  }
+
+
+  export interface IPeopleHeroData {
+    actor: IPersonDetails;
+    topMovies: IWorkSeries[] | IWorkMovies[];
   }

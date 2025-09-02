@@ -19,3 +19,4 @@ export interface IActor {
   profile_path: string | null;
 }
 
+

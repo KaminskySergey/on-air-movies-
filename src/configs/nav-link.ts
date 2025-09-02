@@ -5,4 +5,5 @@ export const headerNavigation: IHeaderNavigation[] = [
   { href: "/", link: "Home" },
   { href: "/movies", link: "Movies" },
   { href: "/series", link: "Series" },
+  { href: "/people", link: "People" },
 ];

@@ -8,15 +8,15 @@ import { LeftNavigation } from "../swiper/left-navigation";
 import { RightNavigation } from "../swiper/right-navigation";
 import { useEffect } from "react";
 import { WorksItem } from "./works-item";
-import { ICastMovies, ICrewMovies } from "@/types/actor-movie";
 import { ICastSeries, ICrewSeries } from "@/types/actor-series";
+import { IWorkMovies } from "@/types/actor-movie";
 
 interface IWorksListHome {
-    items: ICastMovies[] | ICrewMovies[] | ICastSeries[] | ICrewSeries[]
+    items: IWorkMovies[] | ICastSeries[] | ICrewSeries[]
     title: string
 }
 
-const Controls = ({ data }: {data: ICastMovies[] | ICrewMovies[] | ICastSeries[] | ICrewSeries[]}) => {
+const Controls = ({ data }: {data: IWorkMovies[] | ICastSeries[] | ICrewSeries[]}) => {
     const swiper = useSwiper();
 
     useEffect(() => {

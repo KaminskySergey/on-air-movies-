@@ -17,7 +17,7 @@ export const CreditsList = ({ credits }: ICreditsList) => {
                    transition-all duration-300 ease-in-out 
                    hover:bg-gray-700 hover:shadow-lg hover:-translate-y-1"
             >
-                <Link href={`/credits/${el.id}`} className="flex items-center">
+                <Link href={`/people/${el.id}`} className="flex items-center">
                     <div className="relative w-16 h-16 flex-shrink-0">
                         <Image
                             src={

@@ -29,7 +29,7 @@ export function PeopleDetailsComponent({ works, personBasik }: IPeopleDetailsCom
                     </div>
 
                     <div className="flex-1 flex flex-col gap-5 sm:gap-7 text-white min-w-0">
-                        <div className="flex flex-col justify-between gap-7 sm:gap-9 sm:h-[500px]">
+                        <div className="flex flex-col justify-between gap-7 sm:gap-9 sm:h-[564px]">
                             <Biography text={personBasik.biography} />
                             {works.cast.length === 0 && <NotItems
                                 title="No notable works found"

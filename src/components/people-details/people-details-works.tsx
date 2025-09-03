@@ -12,7 +12,7 @@ export function PeopleDetailsWorks({ works}: IPeopleDetailsWorks) {
         .slice(0, 10)
     return (
         <>
-            <div className="w-full overflow-x-auto custom-scrollbar">
+            <div className="w-full overflow-x-auto overflow-y-hidden custom-scrollbar">
                 <List className="flex flex-row gap-5 pb-3  min-w-max">
                     {topCast
                         .map((el, idx) => (

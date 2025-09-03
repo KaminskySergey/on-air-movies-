@@ -44,6 +44,8 @@ export function KinoImagesGallery({ images }: IKinoImagesGallery) {
                                 src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
                                 alt={`img-${idx}`}
                                 fill
+                                priority
+                                unoptimized
                                 sizes="(max-width: 768px) 100vw, 25vw"
                                 className="object-cover cursor-pointer rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
                             />

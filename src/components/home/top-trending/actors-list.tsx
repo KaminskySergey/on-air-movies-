@@ -12,18 +12,18 @@ import { List } from "@/components/ui/list/list"
 
 export const ActorsList = () => {
     const [credits, setCredits] = useState<ICredits | null>(null)
-    const {searchParams} = useCustomSearchParams()
+    const { searchParams } = useCustomSearchParams()
     const type = searchParams.get('type');
     const id = searchParams.get('id');
     useEffect(() => {
         if (!id) return;
-       
+
 
         const fetchDetails = async () => {
             let data = null
             if (type === 'movies') {
 
-                data = await getCreditsCurrentKino("movie" ,id);
+                data = await getCreditsCurrentKino("movie", id);
             }
             if (type === 'series') {
 
@@ -55,6 +55,8 @@ export const ActorsList = () => {
                                     fill
                                     sizes="40"
                                     className="object-cover object-center"
+                                    priority
+                                    unoptimized
                                 />
                             ) : (
                                 <AvatarIcon />

@@ -31,6 +31,7 @@ export const HomeComponent = ({ topTrending, people }: IHomeComponent) => {
                     fill
                     className="object-cover  bg-black/30 backdrop-blur-sm"
                     priority
+                    unoptimized
 
                 />
                 <TopPeople people={people.results} />

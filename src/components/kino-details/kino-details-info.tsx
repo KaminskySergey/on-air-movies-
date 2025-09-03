@@ -30,6 +30,8 @@ export const KinoDetailsInfo = ({ category, item }: IKinoDetailsInfo) => {
                     fill
                     className="object-cover rounded-2xl shadow-lg"
                     sizes="48"
+                    priority
+                    unoptimized
                 />
             </div>
             <div className="text-white lg:py-3  flex flex-col gap-4 lg:gap-5">

@@ -25,7 +25,7 @@ export const KinoDetailsRecommendations = ({ category, recommendations }: IKinoD
         <Container className="flex flex-col gap-5">
             <TitleLinie title="Recommendations" />
             {recommendations.length === 0 ? (
-                <NotItems title="No recommendations available" text="Check back later for more movies or series you might like."/>
+                <NotItems title="No recommendations available" text="Check back later for more movies or series you might like." />
             ) : (
                 <div className="relative overflow-hidden h-64">
 
@@ -57,6 +57,8 @@ export const KinoDetailsRecommendations = ({ category, recommendations }: IKinoD
                                                 : "/placeholder.png"}
                                             className="object-cover object-center transition-transform duration-300 ease-linear group-hover:scale-105 group-hover:brightness-90"
                                             sizes="48"
+                                            priority
+                                            unoptimized
                                         />
 
                                         <div className="absolute bottom-0 left-0 w-full h-14 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md p-2">

@@ -15,13 +15,13 @@ interface IKinoDetails {
     category: "movie" | "tv"
     cast: IActor[]
     kinoId: string
-    counts: {videos: number, posters: number, backdrops: number}
+    counts: { videos: number, posters: number, backdrops: number }
     mediaKinoDetails: IMediaKinoDetails
     recommendations: IMovie[]
 }
 
 
-export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, counts, kinoId, cast, category, detailsInfo }: IKinoDetails) => {
+export const KinoDetailsComponent = async ({ recommendations, mediaKinoDetails, counts, kinoId, cast, category, detailsInfo }: IKinoDetails) => {
 
     const backdropUrl = `https://image.tmdb.org/t/p/original${detailsInfo.backdrop_path}`;
 
@@ -38,8 +38,9 @@ export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, c
                     fill
                     className="object-cover object-top"
                     priority
-                    
-                    
+                    unoptimized
+
+
                 />
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/65 to-transparent" />
@@ -54,10 +55,10 @@ export const KinoDetailsComponent = async ({recommendations, mediaKinoDetails, c
                 <KinoDetailsCast category={category} kinoId={kinoId} cast={cast} />
             </section>
             <section className="bg-black py-[32px]">
-               <KinoMediaTabs mediaKinoDetails={mediaKinoDetails} kinoId={kinoId} counts={counts}/>
+                <KinoMediaTabs mediaKinoDetails={mediaKinoDetails} kinoId={kinoId} counts={counts} />
             </section>
             <section className="bg-black py-[32px]">
-                <KinoDetailsRecommendations category={category} recommendations={recommendations}/>
+                <KinoDetailsRecommendations category={category} recommendations={recommendations} />
             </section>
         </>
     );

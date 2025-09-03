@@ -17,7 +17,7 @@ export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) =>
 
     return (
         <Container className="flex flex-col gap-5">
-            <TitleLinie title="Top Billed Cast"/>
+            <TitleLinie title="Top Billed Cast" />
 
             <List className="flex flex-row gap-5 overflow-x-auto pb-3 custom-scrollbar">
                 {firstPartCast.map(el => (
@@ -34,6 +34,8 @@ export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) =>
                                         src={`https://image.tmdb.org/t/p/w500${el.profile_path}`}
                                         className="object-cover transition-transform duration-500 hover:scale-105"
                                         sizes="48"
+                                        priority
+                                        unoptimized
                                     />
                                 ) : (
                                     <Image
@@ -42,6 +44,8 @@ export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) =>
                                         src="/placeholder-actor.png"
                                         className="object-cover"
                                         sizes="48"
+                                        priority
+                                        unoptimized
                                     />
                                 )}
                             </div>
@@ -59,7 +63,7 @@ export const KinoDetailsCast = ({ kinoId, cast, category }: IKinoDetailsCast) =>
                 ))}
                 <li className="shadow-xl flex-shrink-0">
                     <Link href={`/${category === "tv" ? "series" : "movies"}/${kinoId}/credits`}>
-                        <div className="relative w-[190px] h-full rounded-lg flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 transition">
+                        <div className="relative w-[190px] h-[220px] sm:h-[240px] md:h-[260px] rounded-lg flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 transition">
                             <span className="text-white text-lg font-semibold">View More</span>
                             <ArrowRight />
                         </div>

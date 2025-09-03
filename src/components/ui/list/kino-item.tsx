@@ -8,7 +8,7 @@ interface IKinoItem {
     category: "movie" | "tv"
 }
 
-export const KinoItem = ({category, el }: IKinoItem) => {
+export const KinoItem = ({ category, el }: IKinoItem) => {
 
     const imageUrl = el.poster_path || el.backdrop_path
         ? `https://image.tmdb.org/t/p/${el.poster_path ? 'w500' : 'original'}${el.poster_path || el.backdrop_path}`
@@ -24,8 +24,10 @@ export const KinoItem = ({category, el }: IKinoItem) => {
                             el.original_title ||
                             el.name ||
                             "Poster image"
-                          }
+                        }
                         fill
+                        priority
+                        unoptimized
                         sizes="(max-width: 640px) 100vw,
            (max-width: 1024px) 33vw, 
            20vw"

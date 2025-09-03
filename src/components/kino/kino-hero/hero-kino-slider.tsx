@@ -24,7 +24,7 @@ interface IHeroKinoSlider {
     // heroDetails: IHeroDetails | null
 }
 
-export const HeroKinoSlider = ({genresData, category, data }: IHeroKinoSlider) => {
+export const HeroKinoSlider = ({ genresData, category, data }: IHeroKinoSlider) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     // const [activeIndex, setActiveIndex] = useState(0)
     const [isSwiper, setIsSwiper] = useState(false)
@@ -164,6 +164,7 @@ export const HeroKinoSlider = ({genresData, category, data }: IHeroKinoSlider) =
                                     "border-2 border-blue-500 scale-110 z-10 transition-transform duration-300 ease-in-out": idx === activeIndex
                                 })}
                                 priority
+                                unoptimized
                                 sizes="48"
 
                             // onLoad={() => setIsLoadingImg(false)}

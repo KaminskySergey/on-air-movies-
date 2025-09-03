@@ -20,7 +20,7 @@ export function TopPeopleSwiper({ setActivePerson, people }: ITopPeopleSwiper) {
     const slidesPerView = useResponsiveCount(
         { sm: 570, md: 571 },
         { sm: 1, md: 2, lg: 2 }
-      );
+    );
 
     return <div className="w-full lg:w-[50%] h-[600px] overflow-hidden flex items-center justify-center">
         <div className="w-full h-[90%]">
@@ -71,6 +71,8 @@ export function TopPeopleSwiper({ setActivePerson, people }: ITopPeopleSwiper) {
                                             src={`https://image.tmdb.org/t/p/w300${person.profile_path}`}
                                             alt={person.name}
                                             className="w-full h-full object-cover rounded-lg"
+                                            priority
+                                            unoptimized
                                         />
                                     </div>
                                     {isActive && (

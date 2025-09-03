@@ -14,6 +14,7 @@ export const PeopleProfileImg = ({name, urlImg, birthday }: IPeopleProfileImg) =
                                 src={`${urlImg ? `${TMDBimgMedium}${urlImg}` : "/placeholder.png"}`}
                                 fill
                                 priority
+                                        unoptimized
                                 sizes="48"
                                 className="object-cover rounded-lg"
                             />

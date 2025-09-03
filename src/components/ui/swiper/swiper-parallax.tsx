@@ -48,14 +48,16 @@ export function SwiperParallax({
                             fill
                             className="object-cover object-top"
                             priority
+                            unoptimized
                         />
                     ) : (
                         <Image
                             src="/people-hero.jpg"
                             alt="Default Hero Background"
                             fill
-                            className="object-cover object-center" 
+                            className="object-cover object-center"
                             priority
+                            unoptimized
                         />
                     )}
                     <OverlayBg className="bg-black/60" />

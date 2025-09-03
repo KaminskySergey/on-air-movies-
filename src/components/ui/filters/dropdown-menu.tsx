@@ -71,15 +71,15 @@ export default function DropdownMenu({ itemsMenu, queryKey, defaultValue }: IDro
 
             <div
                 className={cn(
-                    "absolute z-20 pt-2 transform origin-top transition-all duration-300",
+                    "absolute z-20 pt-2 transform origin-top  transition-all duration-300",
                     isVisible
-                        ? "opacity-100 scale-100 translate-y-0"
-                        : "opacity-0 scale-95 -translate-y-3 pointer-events-none"
+                        ? "opacity-100 scale-100 -translate-y-0 -translate-x-28"
+                        : "opacity-0 scale-95 -translate-y-3 pointer-events-none "
                 )}
             >
-                <div className="relative rounded-lg overflow-hidden shadow-xl min-w-[200px] sm:min-w-[250px]">
+                <div className="relative rounded-lg overflow-hidden shadow-xl min-w-[150px] sm:min-w-[200px]">
                     {/* Arrow */}
-                    <div className="absolute top-0 w-4 h-4 origin-center transform rotate-45 translate-x-5 -translate-y-2 rounded-sm pointer-events-none bg-white" />
+                    <div className="absolute top-0 right-0 w-4 h-4 origin-center transform rotate-45 translate-x-5 -translate-y-2 rounded-sm pointer-events-none bg-white" />
 
                     {/* Items */}
                     <List className="relative flex flex-col">

@@ -46,11 +46,11 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
             className={cn(
                 "relative w-full aspect-[2/3] overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out",
                 {
-                    "scale-105 shadow-2xl hover:scale-105  cursor-pointer": isActive,   
+                    "scale-105 shadow-2xl hover:scale-105  cursor-pointer": isActive,
                 }
             )}
-            // onMouseEnter={() => setHovered(true)}
-            // onMouseLeave={() => setHovered(false)}
+        // onMouseEnter={() => setHovered(true)}
+        // onMouseLeave={() => setHovered(false)}
         >
             <Image
                 fill
@@ -58,6 +58,8 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie?.name || movie.id.toString()}
                 className={cn("w-full h-full object-cover")}
+                priority
+                unoptimized
             />
             {!isVisible(idx) && (
                 <div className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-lg"></div>
@@ -81,7 +83,7 @@ export function TopMovieItem({ movie, isActive, isVisible, idx }: ITopMovieItem)
                     <ArrowDownIcon />
                 </div>
             </div>
-                
+
             }
             {isActive && (
                 <button

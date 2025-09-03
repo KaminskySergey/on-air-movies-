@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { IActor} from "@/types/actors";
+import { IActor } from "@/types/actors";
 import Link from "next/link";
 import { AvatarIcon } from "../svg/avatar";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export const ActorsListHero = ({ cast, isLoadingDetails }: IActorsListHero) => {
 
 
 
-   
+
 
     if (isLoadingDetails) {
         return (
@@ -57,6 +57,8 @@ export const ActorsListHero = ({ cast, isLoadingDetails }: IActorsListHero) => {
                                         fill
                                         sizes="48"
                                         className="object-cover object-center"
+                                        priority
+                                        unoptimized
                                     />
                                 ) : (
                                     <AvatarIcon />

@@ -19,6 +19,8 @@ export function KinoImagesTop({ movie, category }: IKinoImagesTop) {
             height={144}
             alt={movie.title || movie.name || movie.id.toString()}
             className="rounded-lg"
+            priority
+            unoptimized
         />
         <div className="flex flex-col h-[144px] justify-around">
             <div className="flex text-lg sm:text-4xl items-center gap-2">

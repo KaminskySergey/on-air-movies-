@@ -29,6 +29,8 @@ export function PeopleDetailsWorks({ works}: IPeopleDetailsWorks) {
                                                 src={`https://image.tmdb.org/t/p/w500${el.poster_path}`}
                                                 className="object-cover "
                                                 sizes="48"
+                                                priority
+                                        unoptimized
                                             />
                                         ) : (
                                             <Image
@@ -37,6 +39,8 @@ export function PeopleDetailsWorks({ works}: IPeopleDetailsWorks) {
                                                 src="/placeholder.png"
                                                 className="object-cover"
                                                 sizes="48"
+                                                priority
+                                        unoptimized
                                             />
                                         )}
 

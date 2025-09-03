@@ -27,7 +27,7 @@ interface IHeroContainer {
     genresData: IGenres[]
 }
 
-export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
+export const HeroContainer = ({ genresData, category, outerSwiperRef, item, heroDetails, isLoadingDetails }: IHeroContainer) => {
     const { trailerKey, isToggle, handleOpenTrailer, handleToggle } = useTrailer(category, item.id);
 
     return <>
@@ -38,6 +38,7 @@ export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroD
                 fill
                 className="object-cover object-top"
                 priority
+                unoptimized
                 sizes="48"
 
             />
@@ -88,7 +89,7 @@ export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroD
 
                             <div className="flex items-center">
                                 <span className="text-white mr-2 md:mr-4">•</span>
-                                
+
                                 {heroDetails?.runtime ? (
                                     <span className="text-xs sm:text-sm text-gray-200">{formatRuntime(heroDetails.runtime)}</span>
                                 ) : (
@@ -118,7 +119,7 @@ export const HeroContainer = ({genresData, category, outerSwiperRef, item, heroD
                             {heroDetails && <ActorsListHero isLoadingDetails={isLoadingDetails} cast={heroDetails?.cast} />}
                         </div>
                         <div>
-                            <ButtonTrailer handleOpenTrailer={handleOpenTrailer}/>
+                            <ButtonTrailer handleOpenTrailer={handleOpenTrailer} />
                         </div>
                     </div>
                     <div

@@ -17,13 +17,13 @@ export function KinoVideosGallery({ videos }: IKinoVideosGallery) {
 
     const toggleVideoModal = (videoKey?: string) => {
         if (videoKey) {
-          setActiveVideo(videoKey);
-          setIsOpen(true);
+            setActiveVideo(videoKey);
+            setIsOpen(true);
         } else {
-          setActiveVideo(null);
-          setIsOpen(false);
+            setActiveVideo(null);
+            setIsOpen(false);
         }
-      };
+    };
 
     return (<>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -37,6 +37,8 @@ export function KinoVideosGallery({ videos }: IKinoVideosGallery) {
                         src={getVideoThumbnail(video.site, video.key)}
                         alt={`${video.name} (${video.type})`}
                         fill
+                        priority
+                        unoptimized
                         sizes="(max-width: 768px) 100vw, 25vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-75"
                     />

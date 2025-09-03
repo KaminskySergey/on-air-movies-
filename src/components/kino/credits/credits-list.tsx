@@ -29,6 +29,8 @@ export const CreditsList = ({ credits }: ICreditsList) => {
                             fill
                             sizes="48px"
                             className="object-cover rounded-lg"
+                            priority
+                            unoptimized
                         />
                     </div>
 

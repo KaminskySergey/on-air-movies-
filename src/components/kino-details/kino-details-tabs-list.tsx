@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
 import { List } from "../ui/list/list"
-import {  TMDBimgOriginal } from "@/const/tmdb-img"
+import { TMDBimgOriginal } from "@/const/tmdb-img"
 import { IImage, IKinoVideo } from "@/types/images"
 import { useState } from "react"
 import { useToggle } from "@/hooks/use-toggle"
@@ -28,7 +28,7 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
     const { isToggle, setIsToggle } = useToggle()
     const [isOpen, setIsOpen] = useState(false)
-    const {pathname} = useCustomSearchParams()
+    const { pathname } = useCustomSearchParams()
 
     const category = pathname.match(/^\/(movies|series)/)?.[1];
 
@@ -53,8 +53,8 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
     }));
     return (
         <>
-        {items.length === 0 && <NotItems title={`No ${type} available`} 
-  text={`This section has no ${type} yet. Check back later.`} />}
+            {items.length === 0 && <NotItems title={`No ${type} available`}
+                text={`This section has no ${type} yet. Check back later.`} />}
             {items.length !== 0 && <List className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {type === "videos" &&
                     items.map((video, idx) => (
@@ -66,6 +66,8 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
                                     alt={video.name}
                                     src={getVideoThumbnail(video.site, video.key)}
                                     className="object-cover cursor-pointer transition group-hover:brightness-75"
+                                    priority
+                                    unoptimized
                                 />
                                 <div onClick={() => toggleVideoModal(video.key)} className="absolute inset-0 flex items-center justify-center">
                                     <span className="w-14 h-14 flex items-center justify-center bg-white/80 rounded-full text-black font-bold text-2xl shadow-md">
@@ -90,6 +92,8 @@ export const KinoDetailsTabsList = ({ items, type, kinoId }: KinoDetailsTabsList
                                             : "/placeholder.png"
                                     }
                                     className="object-cover cursor-pointer transition-transform duration-500 hover:scale-105"
+                                    priority
+                                    unoptimized
                                 />
                             </div>
                         </li>

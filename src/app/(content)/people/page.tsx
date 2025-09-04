@@ -1,14 +1,15 @@
+"use server"
 import { PeopleComponent } from "@/components/people/people-component"
 import { getPeople, getSearchPeople } from "../../../../actions/actors"
+import { Metadata } from "next";
 
 interface IPeoplePage {
     searchParams: Promise<{ [key: string]: string | undefined }>
 }
 
-export async function generateMetadata({ searchParams }: PeoplePageProps): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: IPeoplePage): Promise<Metadata> {
     const params = await searchParams;
     const query = params.search;
-    const page = params.page || "1";
   
     const title = query
       ? `Search results for "${query}" – OnAir Movies`

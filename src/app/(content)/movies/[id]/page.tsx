@@ -2,11 +2,14 @@
 import { KinoDetailsComponent } from "@/components/kino-details/kino-details-component"
 import { getCreditsCurrentKino, getDetailsKino, getKinoImages, getKinoRecommendations, getKinoVideos } from "../../../../../actions/movies"
 import { IMediaKinoDetails } from "@/types/kino-media"
+import type { Metadata } from 'next'
 interface IMoviesDetailsPage {
     params: Promise<{
         id: string
     }>
 }
+
+
 
 export async function generateMetadata({ params }: IMoviesDetailsPage): Promise<Metadata> {
     const { id } = await params;
@@ -23,7 +26,7 @@ export async function generateMetadata({ params }: IMoviesDetailsPage): Promise<
         siteName: "OnAir Movies",
         images: [
           {
-            url: movie.posterUrl,
+            url: movie.poster_path || movie.backdrop_path,
             width: 1200,
             height: 630,
             alt: movie.title,

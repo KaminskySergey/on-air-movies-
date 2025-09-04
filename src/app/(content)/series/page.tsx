@@ -1,3 +1,4 @@
+"use server"
 import { KinoComponent } from "@/components/kino/kino-component";
 import { getKinoWithFilter, getKinoGenres, getTopTrending } from "../../../../actions/movies";
 import { tvSortOptions } from "@/const/kino-sort";

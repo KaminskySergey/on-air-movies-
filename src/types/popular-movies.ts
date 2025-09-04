@@ -34,7 +34,8 @@ export interface IMovies {
     last_air_date?: string;
     status: string;
     genres: { id: number; name: string }[];
-    overview: string;
+    overview?: string;
+    description?: string;
     release_date: string;
     name?: string;
     runtime?: number;

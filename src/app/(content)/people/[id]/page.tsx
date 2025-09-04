@@ -1,16 +1,17 @@
+"use server"
 import { PeopleDetailsComponent } from "@/components/people-details/people-details-component"
 import { getPeopleCombined, getPeopleDetailsId,  } from "../../../../../actions/actors"
+import { Metadata } from "next";
 
 interface IPeopleDetailsPage {
     params: Promise<{
         id: string
     }>
 }
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: IPeopleDetailsPage): Promise<Metadata> {
     const { id } = await params;
     const person = await getPeopleDetailsId(id);
-    const description = person.biography || person.description || `Learn about ${person.name}, browse images, filmography, and watch trailers.`;
-  
+    const description = person.biography || `Learn about ${person.name}, browse images, filmography, and watch trailers.`;
     return {
       title: `${person.name} – OnAir Movies`,
       description,
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         siteName: "OnAir Movies",
         images: [
           {
-            url: person.profilePath || "/og-hero.jpg",
+            url: person.profile_path || "/og-hero.jpg",
             width: 1200,
             height: 630,
             alt: person.name,

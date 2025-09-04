@@ -1,6 +1,8 @@
+"use server"
 import { KinoDetailsComponent } from "@/components/kino-details/kino-details-component"
 import { getCreditsCurrentKino, getDetailsKino, getKinoImages, getKinoRecommendations, getKinoVideos } from "../../../../../actions/movies"
 import { IMediaKinoDetails } from "@/types/kino-media"
+import { Metadata } from "next"
 
 interface ISeriesDetailsPage {
     params: Promise<{
@@ -12,20 +14,20 @@ export async function generateMetadata({ params }: ISeriesDetailsPage): Promise<
     const { id } = await params;
     const movie = await getDetailsKino("tv", id);
     return {
-      title: `${movie.name || movie.original_name} – Watch Online | OnAir Movies`,
+      title: `${movie.name || movie.title} – Watch Online | OnAir Movies`,
       description: movie.overview,
-      keywords: ["movies online", movie.name, "watch trailers", "actors", "movie gallery"],
+      keywords: ["movies online", movie.name || movie.title, "watch trailers", "actors", "movie gallery"],
       openGraph: {
-        title: `${movie.name || movie.original_name} – OnAir Movies`,
+        title: `${movie.name || movie.title} – OnAir Movies`,
         description: movie.overview,
         url: `https://on-air-movies.vercel.app/movies/${movie.id}`,
         siteName: "OnAir Movies",
         images: [
           {
-            url: movie.posterUrl,
+            url: movie.poster_path || movie.backdrop_path,
             width: 1200,
             height: 630,
-            alt: movie.name || movie.original_name,
+            alt: movie.name || movie.title,
           },
         ],
         type: "website",

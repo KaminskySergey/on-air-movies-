@@ -8,6 +8,37 @@ interface ISeriesDetailsPage {
     }>
 }
 
+export async function generateMetadata({ params }: ISeriesDetailsPage): Promise<Metadata> {
+    const { id } = await params;
+    const movie = await getDetailsKino("tv", id);
+    return {
+      title: `${movie.name || movie.original_name} – Watch Online | OnAir Movies`,
+      description: movie.overview,
+      keywords: ["movies online", movie.name, "watch trailers", "actors", "movie gallery"],
+      openGraph: {
+        title: `${movie.name || movie.original_name} – OnAir Movies`,
+        description: movie.overview,
+        url: `https://on-air-movies.vercel.app/movies/${movie.id}`,
+        siteName: "OnAir Movies",
+        images: [
+          {
+            url: movie.posterUrl,
+            width: 1200,
+            height: 630,
+            alt: movie.name || movie.original_name,
+          },
+        ],
+        type: "website",
+        locale: "en_US",
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+      category: "entertainment",
+    };
+  }
+
 export default async function SeriesDetailsPage({ params }: ISeriesDetailsPage) {
 
     const category = "tv"

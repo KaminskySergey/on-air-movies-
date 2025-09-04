@@ -1,13 +1,44 @@
+'use server'
 import { KinoDetailsComponent } from "@/components/kino-details/kino-details-component"
 import { getCreditsCurrentKino, getDetailsKino, getKinoImages, getKinoRecommendations, getKinoVideos } from "../../../../../actions/movies"
 import { IMediaKinoDetails } from "@/types/kino-media"
-
 interface IMoviesDetailsPage {
     params: Promise<{
         id: string
     }>
 }
 
+export async function generateMetadata({ params }: IMoviesDetailsPage): Promise<Metadata> {
+    const { id } = await params;
+    const movie = await getDetailsKino("movie", id);
+ 
+    return {
+      title: `${movie.title} – Watch Online | OnAir Movies`,
+      description: movie.description,
+      keywords: ["movies online", movie.title, "watch trailers", "actors", "movie gallery"],
+      openGraph: {
+        title: `${movie.title} – OnAir Movies`,
+        description: movie.description,
+        url: `https://on-air-movies.vercel.app/movies/${movie.id}`,
+        siteName: "OnAir Movies",
+        images: [
+          {
+            url: movie.posterUrl,
+            width: 1200,
+            height: 630,
+            alt: movie.title,
+          },
+        ],
+        type: "website",
+        locale: "en_US",
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+      category: "entertainment",
+    };
+  }
 export default async function MoviesDetailsPage({ params }: IMoviesDetailsPage) {
 
     const category = "movie"

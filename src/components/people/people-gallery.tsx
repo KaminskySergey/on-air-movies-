@@ -34,6 +34,7 @@ export const PeopleGallery = ({ data }: IPeopleGallery) => {
                             }
                             alt={person.name || "No name"}
                             fill
+                            priority
                             unoptimized 
                             sizes="(max-width: 640px) 100vw,
                    (max-width: 1024px) 33vw,
